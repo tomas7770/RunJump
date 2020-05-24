@@ -139,11 +139,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -149.0
-margin_top = -285.0
-margin_right = 167.0
-margin_bottom = 285.0
-rect_min_size = Vector2( 0, 570 )
+margin_left = -160.0
+margin_top = -315.0
+margin_right = 156.0
+margin_bottom = 315.0
+rect_min_size = Vector2( 0, 630 )
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,6 +154,8 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 4.0
 margin_bottom = 4.0
+presets_enabled = false
+presets_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -168,9 +171,29 @@ margin_right = 129.0
 margin_bottom = -16.0
 custom_fonts/font = SubResource( 5 )
 text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DefaultButton" type="Button" parent="ColorSettings"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -129.0
+margin_top = -160.0
+margin_right = 129.0
+margin_bottom = -96.0
+custom_fonts/font = SubResource( 5 )
+text = "Default"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/MuteButton" to="." method="_on_MuteButton_pressed"]
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/SFXShiftButton" to="." method="_on_SFXShiftButton_pressed"]
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/ColorButton" to="." method="_on_ColorButton_pressed"]
 [connection signal="pressed" from="MainSettings/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="color_changed" from="ColorSettings/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="pressed" from="ColorSettings/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="ColorSettings/DefaultButton" to="." method="_on_DefaultButton_pressed"]

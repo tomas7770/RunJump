@@ -3,6 +3,7 @@ extends CanvasLayer
 onready var main_settings = $MainSettings
 onready var settings_list = $MainSettings/ScrollContainer/VBoxContainer
 onready var color_settings = $ColorSettings
+onready var color_picker = $ColorSettings/ColorPicker
 
 func _ready():
 	update_mute(GlobalVariables.mute_get())
@@ -43,4 +44,9 @@ func _on_BackButton_pressed():
 	color_settings.hide()
 
 func _on_ColorPicker_color_changed(color):
+	VisualServer.set_default_clear_color(color)
+
+func _on_DefaultButton_pressed():
+	var color = ProjectSettings.get_setting("rendering/environment/default_clear_color")
+	color_picker.set_pick_color(color)
 	VisualServer.set_default_clear_color(color)
