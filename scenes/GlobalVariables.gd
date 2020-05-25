@@ -1,6 +1,6 @@
 extends Node
 
-const GAME_VERSION = "Development Version (v0.2.1+)"
+const GAME_VERSION = "v0.2.2"
 var high_score = 0 setget highscore_set, highscore_get # Data ID 0
 var sound_mute = false setget mute_set, mute_get # Data ID 1
 var sound_shift = false setget sfxshift_set, sfxshift_get # Data ID 2

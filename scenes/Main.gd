@@ -54,19 +54,17 @@ func _physics_process(delta):
 			platX.position.x -= speed*delta
 
 func _on_SpawnTimer_timeout():
-	if !(GlobalVariables.pause):
-		var plat = Platform.instance()
-		add_child(plat)
-		plat.scale = Vector2(1+randi()%5,min(1+randi()%5,last_height+3)) # 1-5
-		last_height = plat.scale.y
-		plat.position = Vector2(screen_size.x+32*plat.scale.x,screen_size.y-32*plat.scale.y)
-		$SpawnTimer.start(plat.scale.x/(2.0*(speed/200.0)))
+	var plat = Platform.instance()
+	add_child(plat)
+	plat.scale = Vector2(1+randi()%5,min(1+randi()%5,last_height+3)) # 1-5
+	last_height = plat.scale.y
+	plat.position = Vector2(screen_size.x+32*plat.scale.x,screen_size.y-32*plat.scale.y)
+	$SpawnTimer.start(plat.scale.x/(2.0*(speed/200.0)))
 
 func _on_ScoreTimer_timeout():
-	if !(GlobalVariables.pause):
-		score += 1
-		speed += 2
-		$HUD.update_score(score)
+	score += 1
+	speed += 2
+	$HUD.update_score(score)
 
 func _exit_tree():
 	GlobalVariables.highscore_set(score)
