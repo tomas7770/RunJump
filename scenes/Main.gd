@@ -10,7 +10,7 @@ var last_height = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
+	screen_size = Vector2(480,854)
 	new_game()
 
 func new_game():

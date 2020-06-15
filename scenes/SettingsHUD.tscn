@@ -64,7 +64,6 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 258, 64 )
 custom_fonts/font = SubResource( 1 )
 text = "Sound On"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,7 +75,6 @@ margin_bottom = 144.0
 rect_min_size = Vector2( 258, 64 )
 custom_fonts/font = SubResource( 2 )
 text = "Pitch Shift Off"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -88,7 +86,6 @@ margin_bottom = 224.0
 rect_min_size = Vector2( 258, 64 )
 custom_fonts/font = SubResource( 3 )
 text = "BG Color"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -101,7 +98,6 @@ margin_bottom = 304.0
 rect_min_size = Vector2( 258, 64 )
 custom_fonts/font = SubResource( 3 )
 text = "FG Color"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,7 +110,6 @@ margin_bottom = 304.0
 rect_min_size = Vector2( 258, 64 )
 custom_fonts/font = SubResource( 4 )
 text = "Player Color"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -186,7 +181,6 @@ margin_right = 129.0
 margin_bottom = -96.0
 custom_fonts/font = SubResource( 5 )
 text = "Default"
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

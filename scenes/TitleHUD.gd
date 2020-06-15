@@ -10,4 +10,4 @@ func update_hscore(score):
 	$HighScore.text = str("High Score: ",score)
 
 func _on_SettingsButton_pressed():
-	add_child(SETTINGS_HUD.instance())
+	get_parent().add_child(SETTINGS_HUD.instance())
