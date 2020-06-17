@@ -1,5 +1,5 @@
 #warning-ignore:return_value_discarded
-extends Node2D
+extends Control
 
 export (PackedScene) var Platform
 export var speed = 200
