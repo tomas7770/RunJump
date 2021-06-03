@@ -47,7 +47,10 @@ func load_data():
 	# the object it represents.
 	save_game.open("user://savegame.save", File.READ)
 	while not save_game.eof_reached():
-		var currentline = parse_json(save_game.get_line())
+		var unparsed_line = save_game.get_line()
+		if unparsed_line == "":
+			continue
+		var currentline = parse_json(unparsed_line)
 		if currentline:
 			if currentline.has("high"):
 				high_score = currentline["high"]
