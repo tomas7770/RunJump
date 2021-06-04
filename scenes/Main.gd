@@ -1,6 +1,7 @@
 #warning-ignore:return_value_discarded
 extends Control
 
+enum DIFFICULTY {NORMAL, EASY}
 export (PackedScene) var Platform
 export var initial_speed = 200
 export var speed_increment = 2
@@ -10,18 +11,29 @@ var screen_size = Vector2(480,854)
 var score
 var speed
 var last_height
+var current_difficulty
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game()
 
 func _get_next_plat_size():
-	return Vector2(1+randi()%5,min(1+randi()%5,last_height+3)) # 1-5
+	match current_difficulty:
+		DIFFICULTY.NORMAL:
+			return Vector2(1+randi()%5, min(1+randi()%5, last_height+3)) # 1-5
+		DIFFICULTY.EASY:
+			var width
+			if randi()%7 == 0: # 1/7 chance, half the chance of other values
+				width = 2
+			else: # 6/7 chance, 2/7 for each possible value
+				width = 3+randi()%3
+			return Vector2(width, clamp(1+randi()%5, last_height-2, last_height+3))
 
 func new_game():
 	score = 0
 	speed = initial_speed
 	last_height = initial_height
+	current_difficulty = DIFFICULTY.NORMAL
 	$HUD.update_score(score)
 	player.position = Vector2(128,598)
 	var plats = get_tree().get_nodes_in_group("Platforms")
