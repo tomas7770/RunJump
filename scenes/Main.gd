@@ -2,21 +2,26 @@
 extends Control
 
 export (PackedScene) var Platform
-export var speed = 200
+export var initial_speed = 200
+export var speed_increment = 2
+export var initial_height = 3
 onready var player = get_node("Player")
-var screen_size
+var screen_size = Vector2(480,854)
 var score
-var last_height = 3
+var speed
+var last_height
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = Vector2(480,854)
 	new_game()
+
+func _get_next_plat_size():
+	return Vector2(1+randi()%5,min(1+randi()%5,last_height+3)) # 1-5
 
 func new_game():
 	score = 0
-	speed = 200
-	last_height = 3
+	speed = initial_speed
+	last_height = initial_height
 	$HUD.update_score(score)
 	player.position = Vector2(128,598)
 	var plats = get_tree().get_nodes_in_group("Platforms")
@@ -25,7 +30,7 @@ func new_game():
 	randomize()
 	var plat = Platform.instance()
 	add_child(plat)
-	plat.scale = Vector2(8,3)
+	plat.scale = Vector2(8,initial_height)
 	plat.position = Vector2(32*plat.scale.x,screen_size.y-32*plat.scale.y)
 	$SpawnTimer.set_paused(false)
 	$ScoreTimer.set_paused(false)
@@ -56,14 +61,14 @@ func _physics_process(delta):
 func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()
 	add_child(plat)
-	plat.scale = Vector2(1+randi()%5,min(1+randi()%5,last_height+3)) # 1-5
+	plat.scale = _get_next_plat_size()
 	last_height = plat.scale.y
 	plat.position = Vector2(screen_size.x+32*plat.scale.x,screen_size.y-32*plat.scale.y)
-	$SpawnTimer.start(plat.scale.x/(2.0*(speed/200.0)))
+	$SpawnTimer.start(plat.scale.x/(2.0*(speed/float(initial_speed))))
 
 func _on_ScoreTimer_timeout():
 	score += 1
-	speed += 2
+	speed += speed_increment
 	$HUD.update_score(score)
 
 func _exit_tree():
