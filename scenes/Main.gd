@@ -1,7 +1,7 @@
 #warning-ignore:return_value_discarded
 extends Control
 
-enum DIFFICULTY {NORMAL, EASY}
+const DIFFICULTY = GlobalVariables.DIFFICULTY
 export (PackedScene) var Platform
 export var initial_speed = 200
 export var speed_increment = 2

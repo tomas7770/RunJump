@@ -1,9 +1,10 @@
 extends Node
 
 const GAME_VERSION = "Development Version (v0.2.2+)"
-var high_score = 0 setget highscore_set, highscore_get # Data ID 0
-var sound_mute = false setget mute_set, mute_get # Data ID 1
-var sound_shift = false setget sfxshift_set, sfxshift_get # Data ID 2
+enum DIFFICULTY {NORMAL, EASY}
+var high_score = 0 setget highscore_set, highscore_get
+var sound_mute = false setget mute_set, mute_get
+var sound_shift = false setget sfxshift_set, sfxshift_get
 # warning-ignore:unused_class_variable
 var pause = false
 
