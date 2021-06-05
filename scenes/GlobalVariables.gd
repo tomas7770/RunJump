@@ -5,6 +5,7 @@ enum DIFFICULTY {NORMAL, EASY}
 var high_score = 0 setget highscore_set, highscore_get
 var sound_mute = false setget mute_set, mute_get
 var sound_shift = false setget sfxshift_set, sfxshift_get
+var selected_difficulty = DIFFICULTY.NORMAL
 # warning-ignore:unused_class_variable
 var pause = false
 

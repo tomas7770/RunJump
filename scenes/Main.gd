@@ -33,7 +33,7 @@ func new_game():
 	score = 0
 	speed = initial_speed
 	last_height = initial_height
-	current_difficulty = DIFFICULTY.NORMAL
+	current_difficulty = GlobalVariables.selected_difficulty
 	$HUD.update_score(score)
 	player.position = Vector2(128,598)
 	var plats = get_tree().get_nodes_in_group("Platforms")
