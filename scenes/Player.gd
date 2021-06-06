@@ -23,8 +23,8 @@ func _unhandled_input(event):
 		if event is InputEventMouseButton:  
 			if event.pressed and canJump:  
 				velocity.y -= 1000
-				if !(GlobalVariables.mute_get()):
-					if GlobalVariables.sfxshift_get():
+				if !(GlobalVariables.sound_mute):
+					if GlobalVariables.sound_shift:
 						$JumpSound.set_pitch_scale(rand_range(2.0/3.0,1.5))
 					else:
 						$JumpSound.set_pitch_scale(1.0)

@@ -55,7 +55,7 @@ func _process(_delta):
 		if player.position.y-64 > screen_size.y:
 			GlobalVariables.pause = true
 			$Player.queue_free()
-			GlobalVariables.highscore_set(score)
+			GlobalVariables.highscore_set(score, current_difficulty)
 			$HUD.game_over()
 		if $SpawnTimer.is_paused() or $ScoreTimer.is_paused():
 			$SpawnTimer.set_paused(false)
@@ -84,4 +84,4 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_score(score)
 
 func _exit_tree():
-	GlobalVariables.highscore_set(score)
+	GlobalVariables.highscore_set(score, current_difficulty)

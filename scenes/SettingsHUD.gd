@@ -6,8 +6,8 @@ onready var color_settings = $ColorSettings
 onready var color_picker = $ColorSettings/ColorPicker
 
 func _ready():
-	update_mute(GlobalVariables.mute_get())
-	update_sfxshift(GlobalVariables.sfxshift_get())
+	update_mute(GlobalVariables.sound_mute)
+	update_sfxshift(GlobalVariables.sound_shift)
 	main_settings.popup()
 
 func update_mute(muted):
@@ -23,12 +23,12 @@ func update_sfxshift(enabled):
 		settings_list.get_node("SFXShiftButton").text = str("Pitch Shift Off")
 
 func _on_MuteButton_pressed():
-	var isMuted = GlobalVariables.mute_get()
+	var isMuted = GlobalVariables.sound_mute
 	GlobalVariables.mute_set(!isMuted)
 	update_mute(!isMuted)
 
 func _on_SFXShiftButton_pressed():
-	var isShift = GlobalVariables.sfxshift_get()
+	var isShift = GlobalVariables.sound_shift
 	GlobalVariables.sfxshift_set(!isShift)
 	update_sfxshift(!isShift)
 
