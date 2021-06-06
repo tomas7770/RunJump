@@ -101,3 +101,4 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="DifficultyButton" to="." method="_on_DifficultyButton_pressed"]
