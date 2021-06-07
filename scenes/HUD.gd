@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const SETTINGS_HUD = preload("SettingsHUD.tscn")
+const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -8,13 +9,16 @@ func update_score(score):
 func game_over():
 	$GameOver.popup()
 
-func pause_popup():
+func update_difficulty_label(current_difficulty):
+	$PausePopup.get_node("DifficultyLabel").text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
+
+func _pause_popup():
 	if !($GameOver.visible):
 		GlobalVariables.pause = true
 		$PausePopup.popup()
 
 func _on_PauseButton_pressed():
-	pause_popup()
+	_pause_popup()
 
 func _on_TitleButton_pressed():
 # warning-ignore:return_value_discarded

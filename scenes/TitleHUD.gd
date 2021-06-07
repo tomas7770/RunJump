@@ -2,7 +2,7 @@ extends CanvasLayer
 
 const SETTINGS_HUD = preload("SettingsHUD.tscn")
 const DIFFICULTY = GlobalVariables.DIFFICULTY
-const DIFFICULTY_STRINGS = {DIFFICULTY.NORMAL:"Normal", DIFFICULTY.EASY:"Easy"}
+const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
 
 func _ready():
 	_update_hscore()

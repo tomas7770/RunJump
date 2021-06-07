@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -20,6 +20,10 @@ size = 50
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 50
 font_data = ExtResource( 2 )
 
@@ -111,10 +115,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -200.0
-margin_top = -175.0
+margin_top = -200.0
 margin_right = 200.0
-margin_bottom = 175.0
+margin_bottom = 200.0
 popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="PausePopup"]
 anchor_left = 0.5
@@ -127,6 +134,25 @@ grow_horizontal = 2
 custom_fonts/font = SubResource( 3 )
 text = "Paused"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DifficultyLabel" type="Label" parent="PausePopup"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 80.0
+margin_right = 200.0
+margin_bottom = 120.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 5 )
+text = "Difficulty: Normal"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ContinueButton" type="Button" parent="PausePopup"]
 anchor_left = 0.5
@@ -140,6 +166,9 @@ margin_bottom = -193.0
 grow_horizontal = 2
 custom_fonts/font = SubResource( 4 )
 text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TitleButton2" type="Button" parent="PausePopup"]
 anchor_left = 0.5
@@ -156,16 +185,19 @@ text = "Quit To Title"
 
 [node name="SettingsButton" type="Button" parent="PausePopup"]
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
+anchor_bottom = 1.0
 margin_left = -136.5
-margin_top = 170.0
+margin_top = -180.0
 margin_right = 136.5
-margin_bottom = 237.0
-custom_fonts/font = SubResource( 5 )
+margin_bottom = -113.0
+custom_fonts/font = SubResource( 6 )
 text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="GameOver/TitleButton" to="." method="_on_TitleButton_pressed"]
 [connection signal="pressed" from="GameOver/RetryButton" to="." method="_on_RetryButton_pressed"]

@@ -35,6 +35,7 @@ func new_game():
 	last_height = initial_height
 	current_difficulty = GlobalVariables.selected_difficulty
 	$HUD.update_score(score)
+	$HUD.update_difficulty_label(current_difficulty)
 	player.position = Vector2(128,598)
 	var plats = get_tree().get_nodes_in_group("Platforms")
 	for platX in plats:
