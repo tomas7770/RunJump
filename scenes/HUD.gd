@@ -10,7 +10,7 @@ func game_over():
 	$GameOver.popup()
 
 func update_difficulty_label(current_difficulty):
-	$PausePopup.get_node("DifficultyLabel").text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
+	$PausePopup/DifficultyLabel.text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
 
 func _pause_popup():
 	if !($GameOver.visible):
