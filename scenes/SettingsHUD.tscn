@@ -145,10 +145,10 @@ __meta__ = {
 }
 
 [node name="ColorPicker" type="ColorPicker" parent="ColorSettings"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 4.0
-margin_bottom = 4.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1.0
+margin_bottom = 1.0
 presets_enabled = false
 presets_visible = false
 __meta__ = {
@@ -184,6 +184,7 @@ text = "Default"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/MuteButton" to="." method="_on_MuteButton_pressed"]
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/SFXShiftButton" to="." method="_on_SFXShiftButton_pressed"]
 [connection signal="pressed" from="MainSettings/ScrollContainer/VBoxContainer/ColorButton" to="." method="_on_ColorButton_pressed"]
