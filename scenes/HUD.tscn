@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://animations/HUD/PauseInfoFade.tres" type="Animation" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -154,6 +155,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HighScoreLabel" type="Label" parent="PausePopup"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 80.0
+margin_right = 200.0
+margin_bottom = 120.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 5 )
+text = "High Score: 0"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ContinueButton" type="Button" parent="PausePopup"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -198,9 +216,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PausePopup"]
+anims/PauseInfoFade = ExtResource( 3 )
+
+[node name="InfoFadeTimer" type="Timer" parent="PausePopup"]
+wait_time = 2.0
+
 [connection signal="pressed" from="PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="GameOver/TitleButton" to="." method="_on_TitleButton_pressed"]
 [connection signal="pressed" from="GameOver/RetryButton" to="." method="_on_RetryButton_pressed"]
 [connection signal="pressed" from="PausePopup/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="PausePopup/TitleButton2" to="." method="_on_TitleButton_pressed"]
 [connection signal="pressed" from="PausePopup/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="timeout" from="PausePopup/InfoFadeTimer" to="." method="_on_InfoFadeTimer_timeout"]
