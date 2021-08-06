@@ -19,7 +19,7 @@ func _ready():
 
 func _get_next_plat_size():
 	match current_difficulty:
-		DIFFICULTY.NORMAL:
+		DIFFICULTY.NORMAL, DIFFICULTY.FAST:
 			return Vector2(1+randi()%5, min(1+randi()%5, last_height+3)) # 1-5
 		DIFFICULTY.EASY:
 			var width

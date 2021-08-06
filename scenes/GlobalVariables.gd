@@ -2,8 +2,12 @@ extends Node
 
 const GAME_VERSION = "Development Version (v0.2.2+)"
 const SAVEABLE = {"high_score":"high", "sound_mute":"mute", "sound_shift":"sfxshift"}
-enum DIFFICULTY {NORMAL, EASY}
-const DIFFICULTY_STRINGS = {DIFFICULTY.NORMAL:"Normal", DIFFICULTY.EASY:"Easy"}
+enum DIFFICULTY {NORMAL, EASY, FAST}
+const DIFFICULTY_STRINGS = {
+	DIFFICULTY.NORMAL:"Normal",
+	DIFFICULTY.EASY:"Easy",
+	DIFFICULTY.FAST:"Fast"
+}
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
