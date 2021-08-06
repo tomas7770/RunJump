@@ -4,7 +4,7 @@ extends Control
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 export (PackedScene) var Platform
 export var initial_speed = 200
-export var speed_increment = 2
+export var default_speed_increment = 2
 export var initial_height = 3
 onready var player = get_node("Player")
 var screen_size = Vector2(480,854)
@@ -28,6 +28,13 @@ func _get_next_plat_size():
 			else: # 6/7 chance, 2/7 for each possible value
 				width = 3+randi()%3
 			return Vector2(width, clamp(1+randi()%5, last_height-2, last_height+3))
+
+func _get_speed_increment():
+	match current_difficulty:
+		DIFFICULTY.FAST:
+			return default_speed_increment*2
+		_:
+			return default_speed_increment
 
 func new_game():
 	score = 0
@@ -82,7 +89,7 @@ func _on_SpawnTimer_timeout():
 
 func _on_ScoreTimer_timeout():
 	score += 1
-	speed += speed_increment
+	speed += _get_speed_increment()
 	$HUD.update_score(score)
 
 func _exit_tree():

@@ -30,5 +30,6 @@ one_shot = true
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
