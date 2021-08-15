@@ -6,22 +6,22 @@ enum PAUSEINFO {DIFFICULTY, HIGHSCORE}
 var current_pause_info = PAUSEINFO.DIFFICULTY
 
 func update_score(score):
-	$ScoreLabel.text = str(score)
+	$HUD_Container/ScoreLabel.text = str(score)
 
 func game_over():
-	$GameOver.popup()
+	$HUD_Container/GameOver.popup()
 
 func update_difficulty_label(current_difficulty):
-	$PausePopup/DifficultyLabel.text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
+	$HUD_Container/PausePopup/DifficultyLabel.text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
 
 func update_highscore_label(highscore):
-	$PausePopup/HighScoreLabel.text = "High Score: "+str(highscore)
+	$HUD_Container/PausePopup/HighScoreLabel.text = "High Score: "+str(highscore)
 
 func _pause_popup():
-	if !($GameOver.visible):
+	if !($HUD_Container/GameOver.visible):
 		GlobalVariables.pause = true
-		$PausePopup.popup()
-		$PausePopup/InfoFadeTimer.start()
+		$HUD_Container/PausePopup.popup()
+		$HUD_Container/PausePopup/InfoFadeTimer.start()
 
 func _on_PauseButton_pressed():
 	_pause_popup()
@@ -38,8 +38,8 @@ func _on_RetryButton_pressed():
 
 func _on_ContinueButton_pressed():
 	GlobalVariables.pause = false
-	$PausePopup.visible = false
-	$PausePopup/InfoFadeTimer.stop()
+	$HUD_Container/PausePopup.visible = false
+	$HUD_Container/PausePopup/InfoFadeTimer.stop()
 
 func _on_SettingsButton_pressed():
 	add_child(SETTINGS_HUD.instance())
@@ -47,8 +47,8 @@ func _on_SettingsButton_pressed():
 func _on_InfoFadeTimer_timeout():
 	match current_pause_info:
 		PAUSEINFO.DIFFICULTY:
-			$PausePopup/AnimationPlayer.play("PauseInfoFade")
+			$HUD_Container/PausePopup/AnimationPlayer.play("PauseInfoFade")
 			current_pause_info = PAUSEINFO.HIGHSCORE
 		PAUSEINFO.HIGHSCORE:
-			$PausePopup/AnimationPlayer.play_backwards("PauseInfoFade")
+			$HUD_Container/PausePopup/AnimationPlayer.play_backwards("PauseInfoFade")
 			current_pause_info = PAUSEINFO.DIFFICULTY

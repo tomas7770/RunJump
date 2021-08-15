@@ -1,9 +1,9 @@
 extends CanvasLayer
 
-onready var main_settings = $MainSettings
-onready var settings_list = $MainSettings/ScrollContainer/VBoxContainer
-onready var color_settings = $ColorSettings
-onready var color_picker = $ColorSettings/ColorPicker
+onready var main_settings = $HUD_Container/MainSettings
+onready var settings_list = $HUD_Container/MainSettings/ScrollContainer/VBoxContainer
+onready var color_settings = $HUD_Container/ColorSettings
+onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 
 func _ready():
 	update_mute(GlobalVariables.sound_mute)
