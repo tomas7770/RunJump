@@ -1,6 +1,6 @@
 extends Node
 
-const GAME_VERSION = "Development Version (v0.2.2+)"
+const GAME_VERSION = "v0.3.0 Alpha"
 const SAVEABLE = {"high_score":"high", "sound_mute":"mute", "sound_shift":"sfxshift"}
 enum DIFFICULTY {NORMAL, EASY, FAST}
 const DIFFICULTY_STRINGS = {
