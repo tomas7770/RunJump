@@ -64,6 +64,9 @@ func _process(_delta):
 		if player.position.y-64 > screen_size.y:
 			GlobalVariables.pause = true
 			$Player.queue_free()
+			var old_highscore = GlobalVariables.highscore_get()
+			if score > old_highscore:
+				$HUD.newhighscore(old_highscore, score)
 			GlobalVariables.highscore_set(score, current_difficulty)
 			$HUD.game_over()
 		if $SpawnTimer.is_paused() or $ScoreTimer.is_paused():
