@@ -22,3 +22,12 @@ func _on_DifficultyButton_pressed():
 	GlobalVariables.selected_difficulty = (GlobalVariables.selected_difficulty+1)%(DIFFICULTY.size())
 	_update_hscore()
 	_update_difficulty_label()
+
+func _on_QuitButton_pressed():
+	$HUD_Container/QuitDialog.popup()
+
+func _on_AbortQuitButton_pressed():
+	$HUD_Container/QuitDialog.visible = false
+
+func _on_ConfirmQuitButton_pressed():
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
