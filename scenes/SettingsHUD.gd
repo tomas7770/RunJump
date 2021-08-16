@@ -6,6 +6,7 @@ onready var color_settings = $HUD_Container/ColorSettings
 onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 
 func _ready():
+	GlobalVariables.resize_control_toSafeArea($HUD_Container)
 	update_mute(GlobalVariables.sound_mute)
 	update_sfxshift(GlobalVariables.sound_shift)
 	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION

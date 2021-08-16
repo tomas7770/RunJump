@@ -5,6 +5,9 @@ const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
 enum PAUSEINFO {DIFFICULTY, HIGHSCORE}
 var current_pause_info = PAUSEINFO.DIFFICULTY
 
+func _ready():
+	GlobalVariables.resize_control_toSafeArea($HUD_Container)
+
 func update_score(score):
 	$HUD_Container/ScoreLabel.text = str(score)
 
