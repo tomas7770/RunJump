@@ -8,6 +8,7 @@ onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 func _ready():
 	update_mute(GlobalVariables.sound_mute)
 	update_sfxshift(GlobalVariables.sound_shift)
+	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION
 	main_settings.popup()
 
 func update_mute(muted):

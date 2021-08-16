@@ -8,7 +8,6 @@ func _ready():
 	_resize_container()
 	_update_hscore()
 	_update_difficulty_label()
-	$HUD_Container/VersionLabel.text = GlobalVariables.GAME_VERSION
 
 func _resize_container():
 	# I actually have no idea how this works

@@ -91,16 +91,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VersionLabel" type="Label" parent="HUD_Container"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-margin_right = 200.0
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DifficultyButton" type="Button" parent="HUD_Container"]
 anchor_left = 0.5
 anchor_right = 0.5
