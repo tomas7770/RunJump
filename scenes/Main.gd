@@ -23,11 +23,22 @@ func _get_next_plat_size():
 			return Vector2(1+randi()%5, min(1+randi()%5, last_height+3)) # 1-5
 		DIFFICULTY.EASY:
 			var width
-			if randi()%7 == 0: # 1/7 chance, half the chance of other values
-				width = 2
-			else: # 6/7 chance, 2/7 for each possible value
-				width = 3+randi()%3
-			return Vector2(width, clamp(1+randi()%5, last_height-2, last_height+3))
+			var height
+			var possible_heights = []
+			for i in range(1,6):
+				# Can't spawn two consecutive plats with same height
+				if i != last_height:
+					possible_heights.append(i)
+			height = clamp(possible_heights[randi()%possible_heights.size()], last_height-2, last_height+3)
+			if 1+randi()%5 == height:
+				# Next plat would have the same height, assuming no restrictions
+				width = 5
+			else:
+				if randi()%7 == 0: # 1/7 chance, half the chance of other values
+					width = 2
+				else: # 6/7 chance, 2/7 for each possible value
+					width = 3+randi()%3
+			return Vector2(width, height)
 
 func _get_speed_increment():
 	match current_difficulty:
