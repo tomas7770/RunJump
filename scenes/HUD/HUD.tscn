@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://animations/HUD/PauseInfoFade.tres" type="Animation" id=3]
-
+[ext_resource path="res://scenes/HUD/PausePopup.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -146,6 +146,7 @@ margin_top = -200.0
 margin_right = 200.0
 margin_bottom = 200.0
 popup_exclusive = true
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -254,4 +255,4 @@ wait_time = 2.0
 [connection signal="pressed" from="HUD_Container/PausePopup/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="HUD_Container/PausePopup/TitleButton2" to="." method="_on_TitleButton_pressed"]
 [connection signal="pressed" from="HUD_Container/PausePopup/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="timeout" from="HUD_Container/PausePopup/InfoFadeTimer" to="." method="_on_InfoFadeTimer_timeout"]
+[connection signal="timeout" from="HUD_Container/PausePopup/InfoFadeTimer" to="HUD_Container/PausePopup" method="_on_InfoFadeTimer_timeout"]
