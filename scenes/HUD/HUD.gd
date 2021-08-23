@@ -13,7 +13,9 @@ func game_over():
 	$HUD_Container/GameOver.popup()
 
 func update_difficulty_label(current_difficulty):
-	$HUD_Container/PausePopup/DifficultyLabel.text = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
+	var target_string = "Difficulty: "+DIFFICULTY_STRINGS[current_difficulty]
+	$HUD_Container/PausePopup/DifficultyLabel.text = target_string
+	$HUD_Container/GameOver/DifficultyLabel.text = target_string
 
 func update_highscore_label(highscore):
 	var target_string = "High Score: "+str(highscore)
@@ -21,7 +23,7 @@ func update_highscore_label(highscore):
 	$HUD_Container/GameOver/HighScoreLabel.text = target_string
 
 func newhighscore(old, new):
-	$HUD_Container/GameOver/HighScoreLabel.text = "New High Score!\n("+str(old)+" -> "+str(new)+")"
+	$HUD_Container/GameOver.on_new_highscore(old, new)
 
 func _pause_popup():
 	if !($HUD_Container/GameOver.visible):
