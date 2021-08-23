@@ -8,4 +8,4 @@ func _ready():
 func _unhandled_input(event):  
 	if event is InputEventMouseButton:  
 		if event.pressed:
-			get_tree().change_scene("res://scenes/Main.tscn")
+			get_tree().change_scene("res://scenes/Main/Main.tscn")

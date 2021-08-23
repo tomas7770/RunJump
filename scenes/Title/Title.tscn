@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/Title.gd" type="Script" id=1]
-[ext_resource path="res://scenes/TitleHUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Title/Title.gd" type="Script" id=1]
+[ext_resource path="res://scenes/TitleHUD/TitleHUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/FakePlayer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Platform/Platform.tscn" type="PackedScene" id=4]
 
 [node name="Title" type="Control"]
 anchor_left = 0.5

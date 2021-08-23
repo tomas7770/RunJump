@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const SETTINGS_HUD = preload("SettingsHUD.tscn")
+const SETTINGS_HUD = preload("res://scenes/SettingsHUD/SettingsHUD.tscn")
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
 

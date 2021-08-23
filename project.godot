@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RunJump"
-run/main_scene="res://scenes/Title.tscn"
+run/main_scene="res://scenes/Title/Title.tscn"
 boot_splash/image="res://graphics/splash.png"
 config/icon="res://graphics/gicon.png"
 

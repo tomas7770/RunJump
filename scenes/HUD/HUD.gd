@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const SETTINGS_HUD = preload("SettingsHUD.tscn")
+const SETTINGS_HUD = preload("res://scenes/SettingsHUD/SettingsHUD.tscn")
 const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
 enum PAUSEINFO {DIFFICULTY, HIGHSCORE}
 var current_pause_info = PAUSEINFO.DIFFICULTY
@@ -36,12 +36,12 @@ func _on_PauseButton_pressed():
 
 func _on_TitleButton_pressed():
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://scenes/Title.tscn")
+	get_tree().change_scene("res://scenes/Title/Title.tscn")
 	GlobalVariables.pause = false
 
 func _on_RetryButton_pressed():
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://scenes/Main.tscn")
+	get_tree().change_scene("res://scenes/Main/Main.tscn")
 	GlobalVariables.pause = false
 
 func _on_ContinueButton_pressed():
