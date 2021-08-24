@@ -5,6 +5,7 @@ var showing_new_highscore = false
 func on_new_highscore(old, new):
 	$HighScoreLabel.text = "New High Score!"
 	$NewScoreLabel.text = "("+str(old)+" -> "+str(new)+")"
+	$HighScoreLabel.modulate = Color(0xffbf00ff)
 	$InfoFadeTimer.start(2)
 
 func _on_InfoFadeTimer_timeout():
