@@ -5,7 +5,6 @@
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=4]
 
-
 [node name="Main" type="Control"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -25,10 +24,12 @@ Platform = ExtResource( 2 )
 position = Vector2( 128, 598 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 1.5
 one_shot = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
+process_mode = 0
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
