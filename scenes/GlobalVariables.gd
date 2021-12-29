@@ -8,6 +8,7 @@ const DIFFICULTY_STRINGS = {
 	DIFFICULTY.EASY:"Easy",
 	DIFFICULTY.FAST:"Fast"
 }
+const SAVE_PATH = "user://savegame.save"
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
@@ -40,20 +41,20 @@ func sfxshift_set(val):
 
 func save_data():
 	var save_game = File.new()
-	save_game.open("user://savegame.save", File.WRITE)
+	save_game.open(SAVE_PATH, File.WRITE)
 	var save_dict = {}
 	for key in SAVEABLE:
 		save_dict[SAVEABLE[key]] = self[key]
 	save_game.store_line(to_json(save_dict))
 	save_game.close()
 
-func load_data():
+func load_data(path = SAVE_PATH):
 	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.save"):
+	if not save_game.file_exists(path):
 		return # Error! We don't have a save to load.
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	save_game.open("user://savegame.save", File.READ)
+	save_game.open(path, File.READ)
 	while not save_game.eof_reached():
 		var unparsed_line = save_game.get_line()
 		if unparsed_line == "":
@@ -76,6 +77,22 @@ func load_data():
 							continue
 					self[key] = saved_data
 	save_game.close()
+
+func import_save(path):
+	load_data(path)
+
+func export_save(path):
+	var save_game = File.new()
+	if not save_game.file_exists(SAVE_PATH):
+		return
+	var exported_save = File.new()
+	save_game.open(SAVE_PATH, File.READ)
+	exported_save.open(path, File.WRITE)
+	while not save_game.eof_reached():
+		var line = save_game.get_line()
+		exported_save.store_line(line)
+	save_game.close()
+	exported_save.close()
 
 func resize_control_toSafeArea(control):
 	# Resizes a fullscreen Control to fit window safe area

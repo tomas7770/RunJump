@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/SettingsHUD/SettingsHUD.gd" type="Script" id=2]
@@ -15,8 +15,8 @@ font_data = ExtResource( 1 )
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 36
+[sub_resource type="DynamicFont" id=7]
+size = 40
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -25,6 +25,14 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 36
 font_data = ExtResource( 1 )
 
 [node name="SettingsHUD" type="CanvasLayer"]
@@ -67,7 +75,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer"]
 margin_right = 258.0
-margin_bottom = 224.0
+margin_bottom = 304.0
 custom_constants/separation = 16
 
 [node name="MuteButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
@@ -102,26 +110,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorButton2" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-visible = false
+[node name="AdvancedButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_top = 240.0
 margin_right = 258.0
 margin_bottom = 304.0
 rect_min_size = Vector2( 258, 64 )
-custom_fonts/font = SubResource( 3 )
-text = "FG Color"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorButton3" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-visible = false
-margin_top = 240.0
-margin_right = 258.0
-margin_bottom = 304.0
-rect_min_size = Vector2( 258, 64 )
-custom_fonts/font = SubResource( 4 )
-text = "Player Color"
+custom_fonts/font = SubResource( 7 )
+text = "Advanced"
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -213,10 +209,103 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AdvancedSettings" type="PopupDialog" parent="HUD_Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -240.0
+margin_right = 138.0
+margin_bottom = 230.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HUD_Container/AdvancedSettings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -129.0
+margin_top = 20.0
+margin_right = 129.0
+margin_bottom = 350.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD_Container/AdvancedSettings/ScrollContainer"]
+margin_right = 258.0
+margin_bottom = 144.0
+custom_constants/separation = 16
+
+[node name="ImportButton" type="Button" parent="HUD_Container/AdvancedSettings/ScrollContainer/VBoxContainer"]
+margin_right = 258.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 258, 64 )
+custom_fonts/font = SubResource( 8 )
+text = "Import Data"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportButton" type="Button" parent="HUD_Container/AdvancedSettings/ScrollContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 258.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 258, 64 )
+custom_fonts/font = SubResource( 9 )
+text = "Export Data"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="HUD_Container/AdvancedSettings"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -129.0
+margin_top = -84.0
+margin_right = 129.0
+margin_bottom = -20.0
+custom_fonts/font = SubResource( 3 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="HUD_Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -178.0
+margin_top = -320.0
+margin_right = 178.0
+margin_bottom = 320.0
+popup_exclusive = true
+window_title = ""
+mode_overrides_title = false
+access = 2
+current_dir = "/"
+current_path = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/MuteButton" to="." method="_on_MuteButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SFXShiftButton" to="." method="_on_SFXShiftButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/ColorButton" to="." method="_on_ColorButton_pressed"]
+[connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/AdvancedButton" to="." method="_on_AdvancedButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="color_changed" from="HUD_Container/ColorSettings/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
-[connection signal="pressed" from="HUD_Container/ColorSettings/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="HUD_Container/ColorSettings/BackButton" to="." method="_on_BackButton_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="HUD_Container/ColorSettings/DefaultButton" to="." method="_on_DefaultButton_pressed"]
+[connection signal="pressed" from="HUD_Container/AdvancedSettings/ScrollContainer/VBoxContainer/ImportButton" to="." method="_on_ImportButton_pressed"]
+[connection signal="pressed" from="HUD_Container/AdvancedSettings/ScrollContainer/VBoxContainer/ExportButton" to="." method="_on_ExportButton_pressed"]
+[connection signal="pressed" from="HUD_Container/AdvancedSettings/BackButton" to="." method="_on_BackButton_pressed" binds= [ 1 ]]
+[connection signal="file_selected" from="HUD_Container/FileDialog" to="." method="_on_FileDialog_file_selected"]
