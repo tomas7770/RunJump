@@ -55,15 +55,15 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.update_difficulty_label(current_difficulty)
 	$HUD.update_highscore_label(GlobalVariables.highscore_get())
-	player.position = Vector2(128,598)
+	player.bodyposition = Vector2(128,598)
 	var plats = get_tree().get_nodes_in_group("Platforms")
 	for platX in plats:
 		platX.queue_free()
 	randomize()
 	var plat = Platform.instance()
 	add_child(plat)
-	plat.scale = Vector2(8,initial_height)
-	plat.position = Vector2(32*plat.scale.x,screen_size.y-32*plat.scale.y)
+	plat.bodyscale = Vector2(8,initial_height)
+	plat.bodyposition = Vector2(32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
 	$SpawnTimer.set_paused(false)
 	$ScoreTimer.set_paused(false)
 	$SpawnTimer.start(1.5)
@@ -72,7 +72,7 @@ func new_game():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if !(GlobalVariables.pause):
-		if player.position.y-64 > screen_size.y:
+		if player.bodyposition.y-64 > screen_size.y:
 			GlobalVariables.pause = true
 			$Player.queue_free()
 			var old_highscore = GlobalVariables.highscore_get()
@@ -91,15 +91,15 @@ func _physics_process(delta):
 	if !(GlobalVariables.pause):
 		var plats = get_tree().get_nodes_in_group("Platforms")
 		for platX in plats:
-			platX.position.x -= speed*delta
+			platX.bodyposition.x -= speed*delta
 
 func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()
 	add_child(plat)
-	plat.scale = _get_next_plat_size()
-	last_height = plat.scale.y
-	plat.position = Vector2(screen_size.x+32*plat.scale.x,screen_size.y-32*plat.scale.y)
-	$SpawnTimer.start(plat.scale.x/(2.0*(speed/float(initial_speed))))
+	plat.bodyscale = _get_next_plat_size()
+	last_height = plat.bodyscale.y
+	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/float(initial_speed))))
 
 func _on_ScoreTimer_timeout():
 	score += 1

@@ -1,18 +1,23 @@
-extends KinematicBody2D
+extends Node2D
 
 const gravity = 1500
 var velocity = Vector2()
 var canJump = false
+var bodyposition setget _set_body_position, _get_body_position
+onready var body = $Body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func _process(_delta):
+	$Sprite.position = body.position
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if !(GlobalVariables.pause):
 		velocity.y += delta * gravity
-		velocity = move_and_slide(velocity,Vector2(0,-1))
+		velocity = body.move_and_slide(velocity,Vector2(0,-1))
 		if velocity:
 			canJump = false
 		else:
@@ -33,3 +38,9 @@ func _unhandled_input(event):
 				# Released key
 				if velocity.y < 0:
 					velocity.y *= 0.5
+
+func _set_body_position(pos):
+	body.position = pos
+
+func _get_body_position():
+	return body.position
