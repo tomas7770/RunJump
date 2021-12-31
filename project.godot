@@ -37,6 +37,10 @@ window/stretch/aspect="keep_width"
 
 singletons=[  ]
 
+[physics]
+
+common/physics_jitter_fix=0.0
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

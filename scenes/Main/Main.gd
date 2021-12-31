@@ -56,6 +56,7 @@ func new_game():
 	$HUD.update_difficulty_label(current_difficulty)
 	$HUD.update_highscore_label(GlobalVariables.highscore_get())
 	player.bodyposition = Vector2(128,598)
+	player.reset_interpolation()
 	var plats = get_tree().get_nodes_in_group("Platforms")
 	for platX in plats:
 		platX.queue_free()
@@ -64,6 +65,7 @@ func new_game():
 	add_child(plat)
 	plat.bodyscale = Vector2(8,initial_height)
 	plat.bodyposition = Vector2(32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	plat.reset_interpolation()
 	$SpawnTimer.set_paused(false)
 	$ScoreTimer.set_paused(false)
 	$SpawnTimer.start(1.5)
@@ -99,6 +101,7 @@ func _on_SpawnTimer_timeout():
 	plat.bodyscale = _get_next_plat_size()
 	last_height = plat.bodyscale.y
 	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	plat.reset_interpolation()
 	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/float(initial_speed))))
 
 func _on_ScoreTimer_timeout():

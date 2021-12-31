@@ -3,18 +3,20 @@ extends Node2D
 const gravity = 1500
 var velocity = Vector2()
 var canJump = false
+var prevposition: Vector2
 var bodyposition setget _set_body_position, _get_body_position
 onready var body = $Body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	prevposition = body.position
 
 func _process(_delta):
-	$Sprite.position = body.position
+	$Sprite.position = prevposition.linear_interpolate(body.position, Engine.get_physics_interpolation_fraction())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	prevposition = body.position
 	if !(GlobalVariables.pause):
 		velocity.y += delta * gravity
 		velocity = body.move_and_slide(velocity,Vector2(0,-1))
@@ -44,3 +46,6 @@ func _set_body_position(pos):
 
 func _get_body_position():
 	return body.position
+
+func reset_interpolation():
+	prevposition = body.position
