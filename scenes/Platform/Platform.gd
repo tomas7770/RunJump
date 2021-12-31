@@ -14,6 +14,9 @@ func _process(_delta):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
+func _on_Body_screen_exited():
+	body.get_node("CollisionShape2D").set_deferred("disabled", true)
+
 func _set_body_position(pos):
 	body.position = pos
 
