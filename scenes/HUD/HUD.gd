@@ -2,9 +2,20 @@ extends CanvasLayer
 
 const SETTINGS_HUD = preload("res://scenes/SettingsHUD/SettingsHUD.tscn")
 const DIFFICULTY_STRINGS = GlobalVariables.DIFFICULTY_STRINGS
+var loaded_settings_hud
 
 func _ready():
 	GlobalVariables.resize_control_toSafeArea($HUD_Container)
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \
+	or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		if loaded_settings_hud and is_instance_valid(loaded_settings_hud):
+			return
+		if $HUD_Container/PausePopup.visible:
+			_on_ContinueButton_pressed()
+		else:
+			_on_PauseButton_pressed()
 
 func update_score(score):
 	$HUD_Container/ScoreLabel.text = str(score)
@@ -26,7 +37,7 @@ func newhighscore(old, new):
 	$HUD_Container/GameOver.on_new_highscore(old, new)
 
 func _pause_popup():
-	if !($HUD_Container/GameOver.visible):
+	if !($HUD_Container/GameOver.visible or $HUD_Container/PausePopup.visible):
 		GlobalVariables.pause = true
 		$HUD_Container/PausePopup.popup()
 		$HUD_Container/PausePopup.on_open()
@@ -50,4 +61,5 @@ func _on_ContinueButton_pressed():
 	$HUD_Container/PausePopup.on_close()
 
 func _on_SettingsButton_pressed():
-	add_child(SETTINGS_HUD.instance())
+	loaded_settings_hud = SETTINGS_HUD.instance()
+	add_child(loaded_settings_hud)

@@ -18,6 +18,8 @@ config/name="RunJump"
 run/main_scene="res://scenes/Title/Title.tscn"
 boot_splash/image="res://graphics/splash.png"
 config/icon="res://graphics/gicon.png"
+config/auto_accept_quit=false
+config/quit_on_go_back=false
 
 [autoload]
 

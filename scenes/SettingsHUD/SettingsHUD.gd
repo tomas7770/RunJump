@@ -12,6 +12,14 @@ func _ready():
 	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION
 	main_settings.popup()
 
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \
+	or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		if color_settings.visible:
+			_on_BackButton_pressed()
+		else:
+			_on_CloseButton_pressed()
+
 func update_mute(muted):
 	if muted:
 		settings_list.get_node("MuteButton").text = str("Sound Off")
