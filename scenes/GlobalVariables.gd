@@ -11,6 +11,7 @@ const DIFFICULTY_STRINGS = {
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
+var interpolation = true setget interpolation_set
 var selected_difficulty = DIFFICULTY.NORMAL
 # warning-ignore:unused_class_variable
 var pause = false
@@ -37,6 +38,14 @@ func mute_set(val):
 func sfxshift_set(val):
 	sound_shift = val
 	save_data()
+
+func interpolation_set(enable):
+	assert(typeof(enable) == TYPE_BOOL)
+	interpolation = enable
+	if enable:
+		Engine.physics_jitter_fix = 0
+	else:
+		Engine.physics_jitter_fix = 0.5
 
 func save_data():
 	var save_game = File.new()

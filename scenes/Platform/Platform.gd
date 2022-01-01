@@ -11,7 +11,10 @@ func _ready():
 	prevposition = body.position
 
 func _process(_delta):
-	$Sprite.position = prevposition.linear_interpolate(body.position, Engine.get_physics_interpolation_fraction())
+	if GlobalVariables.interpolation:
+		$Sprite.position = prevposition.linear_interpolate(body.position, Engine.get_physics_interpolation_fraction())
+	else:
+		$Sprite.position = body.position
 
 func _physics_process(_delta):
 	if body_moved:

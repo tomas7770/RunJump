@@ -5,11 +5,13 @@ onready var settings_list = $HUD_Container/MainSettings/ScrollContainer/VBoxCont
 onready var color_settings = $HUD_Container/ColorSettings
 onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 onready var adv_settings = $HUD_Container/AdvSettings
+onready var adv_settings_list = $HUD_Container/AdvSettings/ScrollContainer/VBoxContainer
 
 func _ready():
 	GlobalVariables.resize_control_toSafeArea($HUD_Container)
 	update_mute(GlobalVariables.sound_mute)
 	update_sfxshift(GlobalVariables.sound_shift)
+	update_interp(GlobalVariables.interpolation)
 	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION
 	main_settings.popup()
 
@@ -35,6 +37,9 @@ func update_sfxshift(enabled):
 	else:
 		button.set_pressed_no_signal(false)
 
+func update_interp(enabled):
+	adv_settings_list.get_node("InterpContainer").get_node("CheckButton").set_pressed_no_signal(enabled)
+
 func _submenu_open():
 	return color_settings.visible or adv_settings.visible
 
@@ -43,6 +48,9 @@ func _on_MuteButton_toggled(button_pressed):
 
 func _on_SFXShiftButton_toggled(button_pressed):
 	GlobalVariables.sfxshift_set(button_pressed)
+
+func _on_InterpButton_toggled(button_pressed):
+	GlobalVariables.interpolation = button_pressed
 
 func _on_CloseButton_pressed():
 	queue_free()
