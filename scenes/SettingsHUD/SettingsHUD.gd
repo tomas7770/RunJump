@@ -22,29 +22,27 @@ func _notification(what):
 			_on_CloseButton_pressed()
 
 func update_mute(muted):
+	var button = settings_list.get_node("SoundContainer").get_node("CheckButton")
 	if muted:
-		settings_list.get_node("MuteButton").text = str("Sound Off")
+		button.set_pressed_no_signal(false)
 	else:
-		settings_list.get_node("MuteButton").text = str("Sound On")
+		button.set_pressed_no_signal(true)
 
 func update_sfxshift(enabled):
+	var button = settings_list.get_node("SFXShiftContainer").get_node("CheckButton")
 	if enabled:
-		settings_list.get_node("SFXShiftButton").text = str("Pitch Shift On")
+		button.set_pressed_no_signal(true)
 	else:
-		settings_list.get_node("SFXShiftButton").text = str("Pitch Shift Off")
+		button.set_pressed_no_signal(false)
 
 func _submenu_open():
 	return color_settings.visible or adv_settings.visible
 
-func _on_MuteButton_pressed():
-	var isMuted = GlobalVariables.sound_mute
-	GlobalVariables.mute_set(!isMuted)
-	update_mute(!isMuted)
+func _on_MuteButton_toggled(button_pressed):
+	GlobalVariables.mute_set(!button_pressed)
 
-func _on_SFXShiftButton_pressed():
-	var isShift = GlobalVariables.sound_shift
-	GlobalVariables.sfxshift_set(!isShift)
-	update_sfxshift(!isShift)
+func _on_SFXShiftButton_toggled(button_pressed):
+	GlobalVariables.sfxshift_set(button_pressed)
 
 func _on_CloseButton_pressed():
 	queue_free()
