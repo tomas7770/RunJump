@@ -102,7 +102,7 @@ func _on_SpawnTimer_timeout():
 	last_height = plat.bodyscale.y
 	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
-	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/float(initial_speed))))
+	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/200.0)))
 
 func _on_ScoreTimer_timeout():
 	score += 1
