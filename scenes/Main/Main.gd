@@ -6,6 +6,7 @@ export (PackedScene) var Platform
 export var initial_speed = 200
 export var default_speed_increment = 2
 export var initial_height = 3
+export var distance_scale = 200.0
 onready var player = get_node("Player")
 var screen_size = Vector2(480,854)
 var score
@@ -68,7 +69,7 @@ func new_game():
 	plat.reset_interpolation()
 	$SpawnTimer.set_paused(false)
 	$ScoreTimer.set_paused(false)
-	$SpawnTimer.start(1.5*200.0/speed)
+	$SpawnTimer.start(1.5*distance_scale/speed)
 	$ScoreTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,7 +103,7 @@ func _on_SpawnTimer_timeout():
 	last_height = plat.bodyscale.y
 	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
-	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/200.0)))
+	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/distance_scale)))
 
 func _on_ScoreTimer_timeout():
 	score += 1
