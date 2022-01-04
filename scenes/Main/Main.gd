@@ -68,7 +68,7 @@ func new_game():
 	plat.reset_interpolation()
 	$SpawnTimer.set_paused(false)
 	$ScoreTimer.set_paused(false)
-	$SpawnTimer.start(1.5)
+	$SpawnTimer.start(1.5*200.0/speed)
 	$ScoreTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
