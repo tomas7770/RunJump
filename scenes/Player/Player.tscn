@@ -41,4 +41,3 @@ texture = SubResource( 2 )
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -25.0
