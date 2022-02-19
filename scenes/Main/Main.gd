@@ -2,13 +2,18 @@
 extends Control
 
 const DIFFICULTY = GlobalVariables.DIFFICULTY
+const CHARACTER = GlobalVariables.CHARACTER
+const CHARACTER_SCENES = {
+	CHARACTER.GREEN:"Player",
+	CHARACTER.ORANGE:"OrangePlayer"
+}
 export (PackedScene) var Platform
 export var initial_speed = 250
 export var default_speed_increment = 2
 export var speed_cap = 700
 export var initial_height = 3
 export var distance_scale = 200.0
-onready var player = get_node("Player")
+var player
 var screen_size = Vector2(480,854)
 var score
 var speed
@@ -17,7 +22,15 @@ var current_difficulty
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_add_player()
 	new_game()
+
+func _add_player():
+	var scene_name = CHARACTER_SCENES[GlobalVariables.selected_character]
+	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
+	player = player_scene.instance()
+	add_child(player)
+	move_child(player, 0)
 
 func _get_next_plat_size():
 	match current_difficulty:
@@ -78,7 +91,7 @@ func _process(_delta):
 	if !(GlobalVariables.pause):
 		if player.bodyposition.y-64 > screen_size.y:
 			GlobalVariables.pause = true
-			$Player.queue_free()
+			player.queue_free()
 			var old_highscore = GlobalVariables.highscore_get()
 			if score > old_highscore:
 				$HUD.newhighscore(old_highscore, score)

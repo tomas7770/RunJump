@@ -8,11 +8,17 @@ const DIFFICULTY_STRINGS = {
 	DIFFICULTY.EASY:"Easy",
 	DIFFICULTY.FAST:"Fast"
 }
+enum CHARACTER {GREEN, ORANGE}
+const CHARACTER_STRINGS = {
+	CHARACTER.GREEN:"Green",
+	CHARACTER.ORANGE:"Orange"
+}
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
 var interpolation = true setget interpolation_set
 var selected_difficulty = DIFFICULTY.NORMAL
+var selected_character = CHARACTER.GREEN
 # warning-ignore:unused_class_variable
 var pause = false
 
@@ -101,3 +107,6 @@ func resize_control_toSafeArea(control):
 
 func _exit_tree():
 	save_data()
+
+func next_character():
+	selected_character = (selected_character+1)%(CHARACTER.size())
