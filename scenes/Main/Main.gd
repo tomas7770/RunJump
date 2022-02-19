@@ -5,6 +5,7 @@ const DIFFICULTY = GlobalVariables.DIFFICULTY
 export (PackedScene) var Platform
 export var initial_speed = 250
 export var default_speed_increment = 2
+export var speed_cap = 700
 export var initial_height = 3
 export var distance_scale = 200.0
 onready var player = get_node("Player")
@@ -107,7 +108,7 @@ func _on_SpawnTimer_timeout():
 
 func _on_ScoreTimer_timeout():
 	score += 1
-	speed += _get_speed_increment()
+	speed = min(speed+_get_speed_increment(), speed_cap)
 	$HUD.update_score(score)
 
 func _exit_tree():
