@@ -17,3 +17,7 @@ func _on_InfoFadeTimer_timeout():
 		PAUSEINFO.HIGHSCORE:
 			$AnimationPlayer.play_backwards("PauseInfoFade")
 			current_pause_info = PAUSEINFO.DIFFICULTY
+
+func _on_LabelSwitchButton_pressed():
+	$InfoFadeTimer.stop()
+	_on_InfoFadeTimer_timeout()
