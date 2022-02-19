@@ -108,5 +108,8 @@ func resize_control_toSafeArea(control):
 func _exit_tree():
 	save_data()
 
+func next_difficulty():
+	selected_difficulty = (selected_difficulty+1)%(DIFFICULTY.size())
+
 func next_character():
 	selected_character = (selected_character+1)%(CHARACTER.size())

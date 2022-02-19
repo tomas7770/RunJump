@@ -33,7 +33,7 @@ func _on_SettingsButton_pressed():
 	get_parent().add_child(loaded_settings_hud)
 
 func _on_DifficultyButton_pressed():
-	GlobalVariables.selected_difficulty = (GlobalVariables.selected_difficulty+1)%(DIFFICULTY.size())
+	GlobalVariables.next_difficulty()
 	_update_hscore()
 	_update_difficulty_label()
 
