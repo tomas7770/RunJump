@@ -1,6 +1,6 @@
 extends Node2D
 
-const gravity = 1500
+const gravity = 2000
 var velocity = Vector2()
 var canJump = false
 var prevposition: Vector2
@@ -32,7 +32,7 @@ func _unhandled_input(event):
 	if !(GlobalVariables.pause):
 		if event is InputEventMouseButton:  
 			if event.pressed and canJump:  
-				velocity.y -= 1000
+				velocity.y -= 1200
 				if !(GlobalVariables.sound_mute):
 					if GlobalVariables.sound_shift:
 						$JumpSound.set_pitch_scale(rand_range(2.0/3.0,1.5))
@@ -42,7 +42,7 @@ func _unhandled_input(event):
 			if !(event.pressed):
 				# Released key
 				if velocity.y < 0:
-					velocity.y *= 0.5
+					velocity.y *= 0.35
 
 func _set_body_position(pos):
 	body.position = pos

@@ -3,7 +3,7 @@ extends Control
 
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 export (PackedScene) var Platform
-export var initial_speed = 200
+export var initial_speed = 250
 export var default_speed_increment = 2
 export var initial_height = 3
 export var distance_scale = 200.0
