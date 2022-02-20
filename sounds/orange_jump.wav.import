@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/orange_jump.wav-4d54fa96f711d4b2e72a514c6d7c3cb3.sample"
+
+[deps]
+
+source_file="res://sounds/orange_jump.wav"
+dest_files=[ "res://.import/orange_jump.wav-4d54fa96f711d4b2e72a514c6d7c3cb3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0
