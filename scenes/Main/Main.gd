@@ -4,7 +4,7 @@ extends Control
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 const CHARACTER = GlobalVariables.CHARACTER
 const CHARACTER_SCENES = {
-	CHARACTER.GREEN:"Player",
+	CHARACTER.GREEN:"GreenPlayer",
 	CHARACTER.ORANGE:"OrangePlayer"
 }
 export (PackedScene) var Platform
