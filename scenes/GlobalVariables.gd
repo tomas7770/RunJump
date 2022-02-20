@@ -1,5 +1,7 @@
 extends Node
 
+signal on_pause
+
 const GAME_VERSION = "Dev Version (v0.3.0+)"
 const SAVEABLE = {"high_score":"high", "sound_mute":"mute", "sound_shift":"sfxshift"}
 enum DIFFICULTY {NORMAL, EASY, FAST}
@@ -28,7 +30,7 @@ var interpolation = true setget interpolation_set
 var selected_difficulty = DIFFICULTY.NORMAL
 var selected_character = CHARACTER.GREEN
 # warning-ignore:unused_class_variable
-var pause = false
+var pause = false setget pause_set
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,6 +62,10 @@ func interpolation_set(enable):
 		Engine.physics_jitter_fix = 0
 	else:
 		Engine.physics_jitter_fix = 0.5
+
+func pause_set(val):
+	pause = val
+	emit_signal("on_pause", pause)
 
 func save_data():
 	var save_game = File.new()

@@ -27,6 +27,8 @@ func _ready():
 	var energy_hud = energy_hud_scene.instance()
 	get_parent().add_child(energy_hud)
 	energy_bar = energy_hud.get_node("HUD_Container/ProgressBar")
+	# warning-ignore:return_value_discarded
+	GlobalVariables.connect("on_pause", self, "_on_pause")
 
 func _process(_delta):
 	if GlobalVariables.interpolation:
@@ -75,6 +77,15 @@ func _stop_jump():
 	isFlying = false
 	$Sprite/Particles.emitting = false
 	$JumpSound.stop()
+
+func _on_pause(pause):
+	if pause:
+		# Hack to prevent particles from disappearing
+		# and not resuming processing until emitting again
+		$Sprite/Particles.emitting = true
+	else:
+		$Sprite/Particles.emitting = isFlying
+	$Sprite/Particles.speed_scale = 0 if pause else 1
 
 func _unhandled_input(event):  
 	if !(GlobalVariables.pause):
