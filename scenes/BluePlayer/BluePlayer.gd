@@ -78,6 +78,7 @@ func _stop_jump():
 	isFlying = false
 	$Sprite/Particles.emitting = false
 	$JumpSound.stop()
+	$JumpSound.seek(-1)
 
 func _on_pause(pause):
 	if pause:
