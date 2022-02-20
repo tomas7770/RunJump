@@ -60,6 +60,7 @@ func _on_jump_start():
 		return
 	isFlying = true
 	velocity.y -= initial_fly_velocity
+	$Sprite/Particles.emitting = true
 	if !(GlobalVariables.sound_mute):
 		if GlobalVariables.sound_shift:
 			$JumpSound.set_pitch_scale(rand_range(2.0/3.0,1.5))
@@ -72,6 +73,7 @@ func _on_jump_release():
 
 func _stop_jump():
 	isFlying = false
+	$Sprite/Particles.emitting = false
 	$JumpSound.stop()
 
 func _unhandled_input(event):  
