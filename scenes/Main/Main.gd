@@ -5,7 +5,8 @@ const DIFFICULTY = GlobalVariables.DIFFICULTY
 const CHARACTER = GlobalVariables.CHARACTER
 const CHARACTER_SCENES = {
 	CHARACTER.GREEN:"GreenPlayer",
-	CHARACTER.ORANGE:"OrangePlayer"
+	CHARACTER.ORANGE:"OrangePlayer",
+	CHARACTER.RED:"RedPlayer",
 }
 export (PackedScene) var Platform
 export var initial_speed = 250

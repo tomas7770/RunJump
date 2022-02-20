@@ -20,8 +20,7 @@ func _process(_delta):
 	else:
 		$Sprite.position = body.position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _on_physics_process(delta):
 	prevposition = body.position
 	if !(GlobalVariables.pause):
 		velocity.y += delta * gravity
@@ -30,22 +29,31 @@ func _physics_process(delta):
 			canJump = false
 		else:
 			canJump = true
-	
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	_on_physics_process(delta)
+
+func _on_jump_start():
+	velocity.y -= jump_velocity
+	if !(GlobalVariables.sound_mute):
+		if GlobalVariables.sound_shift:
+			$JumpSound.set_pitch_scale(rand_range(2.0/3.0,1.5))
+		else:
+			$JumpSound.set_pitch_scale(1.0)
+		$JumpSound.play()
+
+func _on_jump_release():
+	if velocity.y < 0:
+		velocity.y *= stop_jump_factor
+
 func _unhandled_input(event):  
 	if !(GlobalVariables.pause):
 		if event is InputEventMouseButton:  
 			if event.pressed and canJump:  
-				velocity.y -= jump_velocity
-				if !(GlobalVariables.sound_mute):
-					if GlobalVariables.sound_shift:
-						$JumpSound.set_pitch_scale(rand_range(2.0/3.0,1.5))
-					else:
-						$JumpSound.set_pitch_scale(1.0)
-					$JumpSound.play()
+				_on_jump_start()
 			if !(event.pressed):
-				# Released key
-				if velocity.y < 0:
-					velocity.y *= stop_jump_factor
+				_on_jump_release()
 
 func _set_body_position(pos):
 	body.position = pos
