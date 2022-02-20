@@ -61,7 +61,8 @@ func _on_jump_start():
 	if is_zero_approx(energy):
 		return
 	isFlying = true
-	velocity.y -= initial_fly_velocity
+	if velocity.y > -initial_fly_velocity:
+		velocity.y = max(velocity.y-initial_fly_velocity, -initial_fly_velocity)
 	$Sprite/Particles.emitting = true
 	if !(GlobalVariables.sound_mute):
 		if GlobalVariables.sound_shift:
