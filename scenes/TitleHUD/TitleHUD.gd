@@ -27,14 +27,8 @@ func _update_difficulty_label():
 
 func _update_character():
 	$HUD_Container/CharacterButton.text = CHARACTER_STRINGS[GlobalVariables.selected_character]
-	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
-	var dummy_player = player_scene.instance()
 	var title = get_parent()
-	title.get_node("Player").get_node("Sprite").self_modulate = dummy_player.get_node("Sprite").self_modulate
-	if dummy_player.get("plat_color"):
-		title.get_node("Platform").set_color(dummy_player.plat_color)
-	else:
-		title.get_node("Platform").set_color("#1f7f1f")
+	title.update_colors()
 
 func _on_SettingsButton_pressed():
 	loaded_settings_hud = SETTINGS_HUD.instance()
