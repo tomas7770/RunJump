@@ -14,6 +14,7 @@ export var speed_cap = 700
 export var initial_height = 3
 export var distance_scale = 200.0
 var player
+var force_plat_color
 var screen_size = Vector2(480,854)
 var score
 var speed
@@ -29,6 +30,8 @@ func _add_player():
 	var scene_name = CHARACTER_SCENES[GlobalVariables.selected_character]
 	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
 	player = player_scene.instance()
+	if player.get("plat_color"):
+		force_plat_color = player.plat_color
 	add_child(player)
 	move_child(player, 0)
 
@@ -77,6 +80,8 @@ func new_game():
 		platX.queue_free()
 	randomize()
 	var plat = Platform.instance()
+	if force_plat_color:
+		plat.set_color(force_plat_color)
 	add_child(plat)
 	plat.bodyscale = Vector2(8,initial_height)
 	plat.bodyposition = Vector2(32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
@@ -112,6 +117,8 @@ func _physics_process(delta):
 
 func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()
+	if force_plat_color:
+		plat.set_color(force_plat_color)
 	add_child(plat)
 	plat.bodyscale = _get_next_plat_size()
 	last_height = plat.bodyscale.y
