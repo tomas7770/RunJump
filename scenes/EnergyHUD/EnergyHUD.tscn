@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://graphics/custom_ui/progressbar_progress.png" type="Texture" id=1]
+[ext_resource path="res://graphics/custom_ui/progressbar_under.png" type="Texture" id=2]
+
+[node name="EnergyHUD" type="CanvasLayer"]
+
+[node name="HUD_Container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="TextureProgress" parent="HUD_Container"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_top = -104.0
+margin_right = 120.0
+margin_bottom = -76.0
+mouse_filter = 2
+max_value = 1.0
+step = 0.0
+value = 1.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 1, 1, 1, 0.498039 )
+tint_progress = Color( 1, 0.246094, 0.246094, 0.498039 )
+nine_patch_stretch = true
+stretch_margin_left = 14
+stretch_margin_top = 14
+stretch_margin_right = 14
+stretch_margin_bottom = 14
+__meta__ = {
+"_edit_use_anchors_": false
+}

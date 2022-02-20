@@ -2,6 +2,9 @@ extends Node2D
 
 var plat_color = Color("#001b96")
 
+var energy_hud_scene = preload("res://scenes/EnergyHUD/EnergyHUD.tscn")
+var energy_bar
+
 var gravity = 2000
 var initial_fly_velocity = 300
 # fly_acceleration_upward: Acceleration when moving up
@@ -14,13 +17,16 @@ var top_limit = 0
 var max_energy = 100.0
 var velocity = Vector2()
 var isFlying = false
-var energy = max_energy
+var energy = max_energy setget _set_energy
 var prevposition: Vector2
 var bodyposition setget _set_body_position, _get_body_position
 onready var body = $Body
 
 func _ready():
 	prevposition = body.position
+	var energy_hud = energy_hud_scene.instance()
+	get_parent().add_child(energy_hud)
+	energy_bar = energy_hud.get_node("HUD_Container/ProgressBar")
 
 func _process(_delta):
 	if GlobalVariables.interpolation:
@@ -34,9 +40,9 @@ func _on_physics_process(delta):
 		if isFlying:
 			var fly_acceleration = fly_acceleration_recovery if velocity.y > 0 else fly_acceleration_upward
 			velocity.y = max(velocity.y-fly_acceleration*delta, -max_fly_velocity)
-			energy -= 20.0*delta
+			_set_energy(energy-20.0*delta)
 			if energy <= 0.0:
-				energy = 0.0
+				_set_energy(0.0)
 				_stop_jump()
 		else:
 			velocity.y += delta * gravity
@@ -44,7 +50,7 @@ func _on_physics_process(delta):
 		if body.position.y < top_limit:
 			body.position.y = top_limit
 		if body.is_on_floor():
-			energy = min(energy+20.0*delta, max_energy)
+			_set_energy(min(energy+20.0*delta, max_energy))
 
 func _physics_process(delta):
 	_on_physics_process(delta)
@@ -84,3 +90,7 @@ func _get_body_position():
 
 func reset_interpolation():
 	prevposition = body.position
+
+func _set_energy(value):
+	energy = value
+	energy_bar.value = value/max_energy
