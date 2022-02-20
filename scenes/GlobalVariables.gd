@@ -14,6 +14,11 @@ const CHARACTER_STRINGS = {
 	CHARACTER.ORANGE:"Orange",
 	CHARACTER.RED:"Red",
 }
+const CHARACTER_SCENES = {
+	CHARACTER.GREEN:"GreenPlayer",
+	CHARACTER.ORANGE:"OrangePlayer",
+	CHARACTER.RED:"RedPlayer",
+}
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
@@ -114,3 +119,8 @@ func next_difficulty():
 
 func next_character():
 	selected_character = (selected_character+1)%(CHARACTER.size())
+
+func load_character_scene(character):
+	var scene_name = CHARACTER_SCENES[character]
+	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
+	return player_scene

@@ -3,11 +3,6 @@ extends Control
 
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 const CHARACTER = GlobalVariables.CHARACTER
-const CHARACTER_SCENES = {
-	CHARACTER.GREEN:"GreenPlayer",
-	CHARACTER.ORANGE:"OrangePlayer",
-	CHARACTER.RED:"RedPlayer",
-}
 export (PackedScene) var Platform
 export var initial_speed = 250
 export var default_speed_increment = 2
@@ -28,8 +23,7 @@ func _ready():
 	new_game()
 
 func _add_player():
-	var scene_name = CHARACTER_SCENES[GlobalVariables.selected_character]
-	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
+	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
 	player = player_scene.instance()
 	if player.get("plat_color"):
 		force_plat_color = player.plat_color

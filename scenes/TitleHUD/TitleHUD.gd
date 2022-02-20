@@ -10,7 +10,7 @@ func _ready():
 	GlobalVariables.resize_control_toSafeArea($HUD_Container)
 	_update_hscore()
 	_update_difficulty_label()
-	_update_character_label()
+	_update_character()
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \
@@ -25,8 +25,16 @@ func _update_hscore():
 func _update_difficulty_label():
 	$HUD_Container/DifficultyButton.text = DIFFICULTY_STRINGS[GlobalVariables.selected_difficulty]
 
-func _update_character_label():
+func _update_character():
 	$HUD_Container/CharacterButton.text = CHARACTER_STRINGS[GlobalVariables.selected_character]
+	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
+	var dummy_player = player_scene.instance()
+	var title = get_parent()
+	title.get_node("Player").get_node("Sprite").modulate = dummy_player.get_node("Sprite").modulate
+	if dummy_player.get("plat_color"):
+		title.get_node("Platform").set_color(dummy_player.plat_color)
+	else:
+		title.get_node("Platform").set_color("#1f7f1f")
 
 func _on_SettingsButton_pressed():
 	loaded_settings_hud = SETTINGS_HUD.instance()
@@ -40,7 +48,7 @@ func _on_DifficultyButton_pressed():
 func _on_CharacterButton_pressed():
 	GlobalVariables.next_character()
 	_update_hscore()
-	_update_character_label()
+	_update_character()
 
 func _on_QuitButton_pressed():
 	$HUD_Container/QuitDialog.popup()
