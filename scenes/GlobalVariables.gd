@@ -8,16 +8,18 @@ const DIFFICULTY_STRINGS = {
 	DIFFICULTY.EASY:"Easy",
 	DIFFICULTY.FAST:"Fast"
 }
-enum CHARACTER {GREEN, ORANGE, RED}
+enum CHARACTER {GREEN, ORANGE, RED, BLUE}
 const CHARACTER_STRINGS = {
 	CHARACTER.GREEN:"Green",
 	CHARACTER.ORANGE:"Orange",
 	CHARACTER.RED:"Red",
+	CHARACTER.BLUE:"Blue",
 }
 const CHARACTER_SCENES = {
 	CHARACTER.GREEN:"GreenPlayer",
 	CHARACTER.ORANGE:"OrangePlayer",
 	CHARACTER.RED:"RedPlayer",
+	CHARACTER.BLUE:"BluePlayer",
 }
 var high_score = {}
 var sound_mute = false
