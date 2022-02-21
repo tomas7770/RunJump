@@ -16,11 +16,13 @@ var score
 var speed
 var last_height
 var current_difficulty
+var in_preparation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_add_player()
 	new_game()
+	GlobalVariables.connect("on_pause", self, "_on_pause")
 
 func _add_player():
 	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
@@ -65,6 +67,7 @@ func new_game():
 	speed = initial_speed
 	last_height = initial_height
 	current_difficulty = GlobalVariables.selected_difficulty
+	in_preparation = true
 	$HUD.update_score(score)
 	$HUD.update_difficulty_label(current_difficulty)
 	$HUD.update_highscore_label(GlobalVariables.highscore_get())
@@ -82,9 +85,8 @@ func new_game():
 	plat.bodyposition = Vector2(32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
 	$SpawnTimer.set_paused(false)
-	$ScoreTimer.set_paused(false)
 	$SpawnTimer.start(1.5*distance_scale/speed)
-	$ScoreTimer.start()
+	$PreparationTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -97,18 +99,23 @@ func _process(_delta):
 				$HUD.newhighscore(old_highscore, score)
 			GlobalVariables.highscore_set(score, current_difficulty)
 			$HUD.game_over()
-		if $SpawnTimer.is_paused() or $ScoreTimer.is_paused():
-			$SpawnTimer.set_paused(false)
-			$ScoreTimer.set_paused(false)
-	elif !($SpawnTimer.is_paused()) or !($ScoreTimer.is_paused()):
-		$SpawnTimer.set_paused(true)
-		$ScoreTimer.set_paused(true)
 
 func _physics_process(delta):
 	if !(GlobalVariables.pause):
 		var plats = get_tree().get_nodes_in_group("Platforms")
 		for platX in plats:
 			platX.bodyposition.x -= speed*delta
+
+func _on_pause(pause):
+	$SpawnTimer.set_paused(pause)
+	if pause:
+		$ScoreTimer.set_paused(true)
+		$PreparationTimer.set_paused(true)
+	else:
+		if in_preparation:
+			$PreparationTimer.set_paused(false)
+		else:
+			$ScoreTimer.set_paused(false)
 
 func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()
@@ -125,6 +132,12 @@ func _on_ScoreTimer_timeout():
 	score += 1
 	speed = min(speed+_get_speed_increment(), speed_cap)
 	$HUD.update_score(score)
+
+func _on_PreparationTimer_timeout():
+	in_preparation = false
+	$ScoreTimer.start()
+	# Pause ScoreTimer if game paused, just in case...
+	$ScoreTimer.set_paused(GlobalVariables.pause)
 
 func _exit_tree():
 	GlobalVariables.highscore_set(score, current_difficulty)

@@ -28,7 +28,13 @@ one_shot = true
 process_mode = 0
 wait_time = 0.5
 
+[node name="PreparationTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 2.0
+one_shot = true
+
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="PreparationTimer" to="." method="_on_PreparationTimer_timeout"]
