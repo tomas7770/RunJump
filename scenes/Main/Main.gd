@@ -16,6 +16,7 @@ var score
 var speed
 var last_height
 var current_difficulty
+var current_character
 var in_preparation
 
 # Called when the node enters the scene tree for the first time.
@@ -67,6 +68,7 @@ func new_game():
 	speed = initial_speed
 	last_height = initial_height
 	current_difficulty = GlobalVariables.selected_difficulty
+	current_character = GlobalVariables.selected_character
 	in_preparation = true
 	$HUD.update_score(score)
 	$HUD.update_difficulty_label(current_difficulty)
@@ -97,7 +99,7 @@ func _process(_delta):
 			var old_highscore = GlobalVariables.highscore_get()
 			if score > old_highscore:
 				$HUD.newhighscore(old_highscore, score)
-			GlobalVariables.highscore_set(score, current_difficulty)
+			GlobalVariables.highscore_set(score, current_character, current_difficulty)
 			$HUD.game_over()
 
 func _physics_process(delta):
@@ -140,4 +142,4 @@ func _on_PreparationTimer_timeout():
 	$ScoreTimer.set_paused(GlobalVariables.pause)
 
 func _exit_tree():
-	GlobalVariables.highscore_set(score, current_difficulty)
+	GlobalVariables.highscore_set(score, current_character, current_difficulty)

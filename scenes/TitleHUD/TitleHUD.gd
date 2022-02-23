@@ -11,6 +11,8 @@ func _ready():
 	_update_hscore()
 	_update_difficulty_label()
 	_update_character()
+	if GlobalVariables.is_save_locked():
+		$HUD_Container/SaveWarning.visible = true
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \

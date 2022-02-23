@@ -23,6 +23,7 @@ const CHARACTER_SCENES = {
 	CHARACTER.RED:"RedPlayer",
 	CHARACTER.BLUE:"BluePlayer",
 }
+var SaveHandler
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
@@ -34,26 +35,31 @@ var pause = false setget pause_set
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var SaveHandlerClass = load("res://scenes/SaveHandler.gd")
+	SaveHandler = SaveHandlerClass.new()
+	add_child(SaveHandler)
 	# Fill default high scores
-	for value in DIFFICULTY.values():
-		high_score[value] = 0
-	load_data()
+	for character_x in CHARACTER.values():
+		high_score[character_x] = {}
+		for difficulty_x in DIFFICULTY.values():
+			high_score[character_x][difficulty_x] = 0
+	SaveHandler.load_data()
 
-func highscore_set(val, played_difficulty):
-	if val > high_score[played_difficulty]:
-		high_score[played_difficulty] = val
-		save_data()
+func highscore_set(val, played_character, played_difficulty):
+	if val > high_score[played_character][played_difficulty]:
+		high_score[played_character][played_difficulty] = val
+		SaveHandler.save_data()
 
 func highscore_get():
-	return high_score[selected_difficulty]
+	return high_score[selected_character][selected_difficulty]
 
 func mute_set(val):
 	sound_mute = val
-	save_data()
+	SaveHandler.save_data()
 
 func sfxshift_set(val):
 	sound_shift = val
-	save_data()
+	SaveHandler.save_data()
 
 func interpolation_set(enable):
 	assert(typeof(enable) == TYPE_BOOL)
@@ -66,45 +72,6 @@ func interpolation_set(enable):
 func pause_set(val):
 	pause = val
 	emit_signal("on_pause", pause)
-
-func save_data():
-	var save_game = File.new()
-	save_game.open("user://savegame.save", File.WRITE)
-	var save_dict = {}
-	for key in SAVEABLE:
-		save_dict[SAVEABLE[key]] = self[key]
-	save_game.store_line(to_json(save_dict))
-	save_game.close()
-
-func load_data():
-	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.save"):
-		return # Error! We don't have a save to load.
-	# Load the file line by line and process that dictionary to restore
-	# the object it represents.
-	save_game.open("user://savegame.save", File.READ)
-	while not save_game.eof_reached():
-		var unparsed_line = save_game.get_line()
-		if unparsed_line == "":
-			continue
-		var currentline = parse_json(unparsed_line)
-		if currentline:
-			for key in SAVEABLE:
-				var value = SAVEABLE[key]
-				if currentline.has(value):
-					var saved_data = currentline[value]
-					if value == "high":
-						if typeof(saved_data) == TYPE_REAL:
-							# Backwards compatibility with older saves
-							high_score[DIFFICULTY.NORMAL] = saved_data
-							continue
-						else:
-							# Need to cast JSON string keys to integer (enum)
-							for difficulty_key in saved_data:
-								high_score[int(difficulty_key)] = saved_data[difficulty_key]
-							continue
-					self[key] = saved_data
-	save_game.close()
 
 func resize_control_toSafeArea(control):
 	# Resizes a fullscreen Control to fit window safe area
@@ -120,7 +87,7 @@ func resize_control_toSafeArea(control):
 	control.rect_size = safe_area_relative_to_parent.size
 
 func _exit_tree():
-	save_data()
+	SaveHandler.save_data()
 
 func next_difficulty():
 	selected_difficulty = (selected_difficulty+1)%(DIFFICULTY.size())
@@ -132,3 +99,6 @@ func load_character_scene(character):
 	var scene_name = CHARACTER_SCENES[character]
 	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
 	return player_scene
+
+func is_save_locked():
+	return SaveHandler.save_locked

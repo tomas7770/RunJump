@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/TitleHUD/TitleHUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -33,6 +33,10 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
 font_data = ExtResource( 2 )
 
 [node name="TitleHUD" type="CanvasLayer"]
@@ -197,6 +201,41 @@ margin_right = 134.0
 margin_bottom = -28.0
 custom_fonts/font = SubResource( 8 )
 text = "Yes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveWarning" type="Panel" parent="HUD_Container"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.625
+anchor_right = 0.5
+anchor_bottom = 0.625
+margin_left = -200.0
+margin_top = -190.0
+margin_right = 200.0
+margin_bottom = 110.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD_Container/SaveWarning"]
+modulate = Color( 1, 0.247059, 0.247059, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 9 )
+text = "The save file loaded is of an 
+incompatible format. You 
+may be trying to load a file
+from a newer version of the
+game, or your save file is 
+corrupted. Saving will be
+disabled until you solve
+this issue, to prevent
+overwriting data."
+align = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
