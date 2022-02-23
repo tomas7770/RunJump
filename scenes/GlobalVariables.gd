@@ -67,6 +67,7 @@ func interpolation_set(enable):
 		Engine.physics_jitter_fix = 0
 	else:
 		Engine.physics_jitter_fix = 0.5
+	SaveHandler.save_data()
 
 func pause_set(val):
 	pause = val
