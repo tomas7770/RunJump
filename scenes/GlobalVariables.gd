@@ -3,7 +3,6 @@ extends Node
 signal on_pause
 
 const GAME_VERSION = "Dev Version (v0.3.0+)"
-const SAVEABLE = {"high_score":"high", "sound_mute":"mute", "sound_shift":"sfxshift"}
 enum DIFFICULTY {NORMAL, EASY, FAST}
 const DIFFICULTY_STRINGS = {
 	DIFFICULTY.NORMAL:"Normal",
