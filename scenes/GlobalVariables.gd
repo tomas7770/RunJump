@@ -2,7 +2,7 @@ extends Node
 
 signal on_pause
 
-const GAME_VERSION = "Dev Version (v0.3.0+)"
+const GAME_VERSION = "v0.4.0 Beta"
 enum DIFFICULTY {NORMAL, EASY, FAST}
 const DIFFICULTY_STRINGS = {
 	DIFFICULTY.NORMAL:"Normal",
