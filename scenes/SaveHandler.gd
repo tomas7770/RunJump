@@ -92,11 +92,12 @@ func load_data():
 			for character_x in CHARACTER.values():
 				for difficulty_x in DIFFICULTY.values():
 					var high_score_x = config.get_value(SCORE_SECTION, \
-					_score_key(character_x, difficulty_x))
+					_score_key(character_x, difficulty_x), GlobalVariables.high_score[character_x][difficulty_x])
 					GlobalVariables.high_score[character_x][difficulty_x] = high_score_x
-			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute")
-			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift")
-			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation"), false)
+			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
+			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
+			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation", \
+											GlobalVariables.interpolation), false)
 		_:
 			# Unknown
 			# Warn about it and prevent overwriting
