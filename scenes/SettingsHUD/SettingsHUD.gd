@@ -50,7 +50,7 @@ func _on_SFXShiftButton_toggled(button_pressed):
 	GlobalVariables.sfxshift_set(button_pressed)
 
 func _on_InterpButton_toggled(button_pressed):
-	GlobalVariables.interpolation = button_pressed
+	GlobalVariables.interpolation_set(button_pressed)
 
 func _on_CloseButton_pressed():
 	queue_free()

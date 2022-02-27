@@ -26,7 +26,7 @@ var SaveHandler
 var high_score = {}
 var sound_mute = false
 var sound_shift = false
-var interpolation = true setget interpolation_set
+var interpolation = true
 var selected_difficulty = DIFFICULTY.NORMAL
 var selected_character = CHARACTER.GREEN
 # warning-ignore:unused_class_variable
@@ -60,14 +60,15 @@ func sfxshift_set(val):
 	sound_shift = val
 	SaveHandler.save_data()
 
-func interpolation_set(enable):
+func interpolation_set(enable, do_save = true):
 	assert(typeof(enable) == TYPE_BOOL)
 	interpolation = enable
 	if enable:
 		Engine.physics_jitter_fix = 0
 	else:
 		Engine.physics_jitter_fix = 0.5
-	SaveHandler.save_data()
+	if do_save:
+		SaveHandler.save_data()
 
 func pause_set(val):
 	pause = val

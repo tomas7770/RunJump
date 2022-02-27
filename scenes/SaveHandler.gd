@@ -96,7 +96,7 @@ func load_data():
 					GlobalVariables.high_score[character_x][difficulty_x] = high_score_x
 			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute")
 			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift")
-			GlobalVariables.interpolation = config.get_value(CONFIG_SECTION, "interpolation")
+			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation"), false)
 		_:
 			# Unknown
 			# Warn about it and prevent overwriting
