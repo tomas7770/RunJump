@@ -1,16 +1,20 @@
 #warning-ignore:return_value_discarded
 extends Control
 
+var char_locked = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _unhandled_input(event):  
+	if char_locked:
+		return
 	if event is InputEventMouseButton:  
 		if event.pressed:
 			get_tree().change_scene("res://scenes/Main/Main.tscn")
 
-func update_colors():
+func _update_colors():
 	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
 	var dummy_player = player_scene.instance()
 	$Player/Sprite.self_modulate = dummy_player.get_node("Sprite").self_modulate
@@ -18,3 +22,7 @@ func update_colors():
 		$Platform.set_color(dummy_player.plat_color)
 	else:
 		$Platform.set_color("#1f7f1f")
+
+func update_character():
+	char_locked = GlobalVariables.is_char_locked(GlobalVariables.selected_character)
+	_update_colors()

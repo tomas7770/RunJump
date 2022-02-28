@@ -22,6 +22,9 @@ const CHARACTER_SCENES = {
 	CHARACTER.RED:"RedPlayer",
 	CHARACTER.BLUE:"BluePlayer",
 }
+const UNLOCKABLE_CHAR = [CHARACTER.BLUE]
+const UNLOCK_CHAR_REQ = {CHARACTER.BLUE: [150, CHARACTER.RED, DIFFICULTY.NORMAL]}
+
 var SaveHandler
 var high_score = {}
 var unlocked_characters = []
@@ -101,6 +104,9 @@ func load_character_scene(character):
 	var scene_name = CHARACTER_SCENES[character]
 	var player_scene = load("res://scenes/"+scene_name+"/"+scene_name+".tscn")
 	return player_scene
+
+func is_char_locked(character):
+	return UNLOCKABLE_CHAR.has(character) and !unlocked_characters.has(character)
 
 func is_save_locked():
 	return SaveHandler.save_locked

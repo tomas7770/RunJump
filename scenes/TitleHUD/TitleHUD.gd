@@ -27,10 +27,24 @@ func _update_hscore():
 func _update_difficulty_label():
 	$HUD_Container/DifficultyButton.text = DIFFICULTY_STRINGS[GlobalVariables.selected_difficulty]
 
+func _set_char_locked(locked):
+	$HUD_Container/Label2.visible = !locked
+	$HUD_Container/LockIcon.visible = locked
+	$HUD_Container/LockLabel.visible = locked
+	if locked:
+		var reqs = GlobalVariables.UNLOCK_CHAR_REQ[GlobalVariables.selected_character]
+		$HUD_Container/LockLabel.text = \
+		"Score {x} with {y} on {z} to unlock".format({
+			"x": reqs[0],
+			"y": GlobalVariables.CHARACTER_STRINGS[reqs[1]],
+			"z": GlobalVariables.DIFFICULTY_STRINGS[reqs[2]]})
+
 func _update_character():
-	$HUD_Container/CharacterButton.text = CHARACTER_STRINGS[GlobalVariables.selected_character]
+	var character = GlobalVariables.selected_character
+	$HUD_Container/CharacterButton.text = CHARACTER_STRINGS[character]
+	_set_char_locked(GlobalVariables.is_char_locked(character))
 	var title = get_parent()
-	title.update_colors()
+	title.update_character()
 
 func _on_SettingsButton_pressed():
 	loaded_settings_hud = SETTINGS_HUD.instance()
