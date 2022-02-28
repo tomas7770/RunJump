@@ -48,10 +48,12 @@ func _ready():
 			high_score[character_x][difficulty_x] = 0
 	SaveHandler.load_data()
 
-func highscore_set(val, played_character, played_difficulty):
+func highscore_set(val, played_character, played_difficulty, do_save = true):
 	if val > high_score[played_character][played_difficulty]:
 		high_score[played_character][played_difficulty] = val
-		SaveHandler.save_data()
+		_unlock_characters()
+		if do_save:
+			SaveHandler.save_data()
 
 func highscore_get():
 	return high_score[selected_character][selected_difficulty]
@@ -107,6 +109,14 @@ func load_character_scene(character):
 
 func is_char_locked(character):
 	return UNLOCKABLE_CHAR.has(character) and !unlocked_characters.has(character)
+
+func _unlock_characters():
+	for character in UNLOCKABLE_CHAR:
+		if unlocked_characters.has(character):
+			continue
+		var reqs = UNLOCK_CHAR_REQ[character]
+		if high_score[reqs[1]][reqs[2]] >= reqs[0]:
+			unlocked_characters.append(character)
 
 func is_save_locked():
 	return SaveHandler.save_locked

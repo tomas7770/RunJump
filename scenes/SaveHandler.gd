@@ -94,9 +94,12 @@ func load_data():
 				for difficulty_x in DIFFICULTY.values():
 					var high_score_x = config.get_value(SCORE_SECTION, \
 					_score_key(character_x, difficulty_x), GlobalVariables.high_score[character_x][difficulty_x])
-					GlobalVariables.high_score[character_x][difficulty_x] = high_score_x
-			GlobalVariables.unlocked_characters = config.get_value(UNLOCK_SECTION, "unlocked_characters", \
+					GlobalVariables.highscore_set(high_score_x, character_x, difficulty_x, false)
+			var saved_unlocked_characters = config.get_value(UNLOCK_SECTION, "unlocked_characters", \
 											GlobalVariables.unlocked_characters)
+			for character_x in saved_unlocked_characters:
+				if !GlobalVariables.unlocked_characters.has(character_x):
+					GlobalVariables.unlocked_characters.append(character_x)
 			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
 			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
 			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation", \
