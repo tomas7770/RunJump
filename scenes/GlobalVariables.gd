@@ -24,6 +24,7 @@ const CHARACTER_SCENES = {
 }
 var SaveHandler
 var high_score = {}
+var unlocked_characters = []
 var sound_mute = false
 var sound_shift = false
 var interpolation = true

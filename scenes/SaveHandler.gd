@@ -6,6 +6,7 @@ const SAVE_PATH = "user://savegame.save"
 
 const METADATA_SECTION = "MetaData"
 const SCORE_SECTION = "HighScores"
+const UNLOCK_SECTION = "Unlockable"
 const CONFIG_SECTION = "Config"
 
 const LEGACY_HIGHSCORE_KEY = "high"
@@ -94,6 +95,8 @@ func load_data():
 					var high_score_x = config.get_value(SCORE_SECTION, \
 					_score_key(character_x, difficulty_x), GlobalVariables.high_score[character_x][difficulty_x])
 					GlobalVariables.high_score[character_x][difficulty_x] = high_score_x
+			GlobalVariables.unlocked_characters = config.get_value(UNLOCK_SECTION, "unlocked_characters", \
+											GlobalVariables.unlocked_characters)
 			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
 			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
 			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation", \
@@ -113,6 +116,7 @@ func save_data():
 		for difficulty_x in DIFFICULTY.values():
 			var high_score_x = GlobalVariables.high_score[character_x][difficulty_x]
 			config.set_value(SCORE_SECTION, _score_key(character_x, difficulty_x), int(high_score_x))
+	config.set_value(UNLOCK_SECTION, "unlocked_characters", GlobalVariables.unlocked_characters)
 	config.set_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
 	config.set_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
 	config.set_value(CONFIG_SECTION, "interpolation", GlobalVariables.interpolation)
