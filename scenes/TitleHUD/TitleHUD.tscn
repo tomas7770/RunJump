@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/TitleHUD/TitleHUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://graphics/custom_ui/locker.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -21,6 +22,10 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=6]
@@ -131,6 +136,34 @@ margin_bottom = 314.0
 custom_fonts/font = SubResource( 5 )
 text = "Green"
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LockIcon" type="TextureRect" parent="HUD_Container"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -180.0
+margin_top = 250.0
+margin_right = -116.0
+margin_bottom = 314.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LockLabel" type="Label" parent="HUD_Container"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -199.0
+margin_top = 330.0
+margin_right = 199.0
+margin_bottom = 411.0
+custom_fonts/font = SubResource( 10 )
+text = "Score x with y on z to unlock"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
