@@ -20,6 +20,7 @@ var last_height
 var current_difficulty
 var current_character
 var in_preparation
+var game_over = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -92,10 +93,13 @@ func new_game():
 	$SpawnTimer.start(1.5*distance_scale/speed)
 	$PreparationTimer.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if !(GlobalVariables.pause):
+func _physics_process(delta):
+	if !(GlobalVariables.pause) and !game_over:
+		var plats = get_tree().get_nodes_in_group("Platforms")
+		for platX in plats:
+			platX.bodyposition.x -= speed*delta
 		if player.bodyposition.y-64 > screen_size.y:
+			game_over = true
 			GlobalVariables.pause = true
 			player.queue_free()
 			var old_highscore = GlobalVariables.highscore_get()
@@ -103,12 +107,6 @@ func _process(_delta):
 				$HUD.newhighscore(old_highscore, score)
 			GlobalVariables.highscore_set(score, current_character, current_difficulty)
 			$HUD.game_over()
-
-func _physics_process(delta):
-	if !(GlobalVariables.pause):
-		var plats = get_tree().get_nodes_in_group("Platforms")
-		for platX in plats:
-			platX.bodyposition.x -= speed*delta
 
 func _on_pause(pause):
 	$SpawnTimer.set_paused(pause)
