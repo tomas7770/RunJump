@@ -38,6 +38,7 @@ var pause = false setget pause_set
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	var SaveHandlerClass = load("res://scenes/SaveHandler.gd")
 	SaveHandler = SaveHandlerClass.new()
 	add_child(SaveHandler)

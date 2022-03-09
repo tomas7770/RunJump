@@ -5,13 +5,10 @@ const LAYER_DIST = {
 	"Layer2": 4,
 }
 export (PackedScene) var BGPlat
-# Use separate RNG to avoid interfering with game logic
-var rng = RandomNumberGenerator.new()
 var main
 var screen_size
 
 func _ready():
-	rng.randomize()
 	main = get_parent()
 	screen_size = main.screen_size
 	# warning-ignore:return_value_discarded
@@ -37,7 +34,7 @@ func _on_pause(pause):
 		timer.set_paused(pause)
 
 func _get_next_plat_size():
-	return Vector2(1+rng.randi()%5, 1+rng.randi()%5) # 1-5
+	return Vector2(1+randi()%5, 1+randi()%5) # 1-5
 
 func _on_SpawnTimer_timeout(timer):
 	var layer = timer.get_parent()

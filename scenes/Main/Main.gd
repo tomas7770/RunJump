@@ -9,6 +9,8 @@ export var default_speed_increment = 2
 export var speed_cap = 700
 export var initial_height = 3
 export var distance_scale = 200.0
+# Use separate RNG to prevent game logic from being affected by other RNG calls
+var rng = RandomNumberGenerator.new()
 var player
 var force_plat_color
 var screen_size = Vector2(480,854)
@@ -36,7 +38,7 @@ func _add_player():
 func _get_next_plat_size():
 	match current_difficulty:
 		DIFFICULTY.NORMAL, DIFFICULTY.FAST:
-			return Vector2(1+randi()%5, min(1+randi()%5, last_height+3)) # 1-5
+			return Vector2(1+rng.randi()%5, min(1+rng.randi()%5, last_height+3)) # 1-5
 		DIFFICULTY.EASY:
 			var width
 			var height
@@ -45,15 +47,15 @@ func _get_next_plat_size():
 				# Can't spawn two consecutive plats with same height
 				if i != last_height:
 					possible_heights.append(i)
-			height = clamp(possible_heights[randi()%possible_heights.size()], last_height-2, last_height+3)
-			if 1+randi()%5 == height:
+			height = clamp(possible_heights[rng.randi()%possible_heights.size()], last_height-2, last_height+3)
+			if 1+rng.randi()%5 == height:
 				# Next plat would have the same height, assuming no restrictions
 				width = 5
 			else:
-				if randi()%7 == 0: # 1/7 chance, half the chance of other values
+				if rng.randi()%7 == 0: # 1/7 chance, half the chance of other values
 					width = 2
 				else: # 6/7 chance, 2/7 for each possible value
-					width = 3+randi()%3
+					width = 3+rng.randi()%3
 			return Vector2(width, height)
 
 func _get_speed_increment():
@@ -78,7 +80,7 @@ func new_game():
 	var plats = get_tree().get_nodes_in_group("Platforms")
 	for platX in plats:
 		platX.queue_free()
-	randomize()
+	rng.randomize()
 	var plat = Platform.instance()
 	if force_plat_color:
 		plat.set_color(force_plat_color)
