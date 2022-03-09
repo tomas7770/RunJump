@@ -11,6 +11,7 @@ var main
 var screen_size
 
 func _ready():
+	rng.randomize()
 	main = get_parent()
 	screen_size = main.screen_size
 	# warning-ignore:return_value_discarded
