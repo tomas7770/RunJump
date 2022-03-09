@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Background/Background.gd" type="Script" id=1]
+[ext_resource path="res://scenes/BGPlat/BGPlat.tscn" type="PackedScene" id=2]
+
+[node name="Background" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+BGPlat = ExtResource( 2 )
+
+[node name="Layer1" type="Node2D" parent="."]
+modulate = Color( 0.33, 0.33, 0.33, 1 )
+z_index = -1
+
+[node name="SpawnTimer" type="Timer" parent="Layer1"]
+process_mode = 0
+one_shot = true
+autostart = true
+
+[node name="Layer2" type="Node2D" parent="."]
+modulate = Color( 0.16, 0.16, 0.16, 1 )
+z_index = -2
+
+[node name="SpawnTimer" type="Timer" parent="Layer2"]
+process_mode = 0
+one_shot = true
+autostart = true
