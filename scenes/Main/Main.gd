@@ -109,6 +109,9 @@ func _physics_process(delta):
 			$HUD.game_over()
 
 func _on_pause(pause):
+	if game_over and !pause:
+		# Don't unpause timers after game over
+		return
 	$SpawnTimer.set_paused(pause)
 	if pause:
 		$ScoreTimer.set_paused(true)
