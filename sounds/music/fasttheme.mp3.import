@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fasttheme.mp3-96c3aa664729259962ab83e5123091b7.mp3str"
+
+[deps]
+
+source_file="res://sounds/music/fasttheme.mp3"
+dest_files=[ "res://.import/fasttheme.mp3-96c3aa664729259962ab83e5123091b7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

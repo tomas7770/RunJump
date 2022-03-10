@@ -103,7 +103,7 @@ margin_right = 173.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 9 )
-text = "Sound"
+text = "SFX"
 
 [node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SoundContainer"]
 margin_left = 177.0

@@ -48,6 +48,9 @@ func _ready():
 		for difficulty_x in DIFFICULTY.values():
 			high_score[character_x][difficulty_x] = 0
 	SaveHandler.load_data()
+	var MusicPlayerClass = load("res://scenes/MusicPlayer.gd")
+	var MusicPlayer = MusicPlayerClass.new()
+	add_child(MusicPlayer)
 
 func highscore_set(val, played_character, played_difficulty, do_save = true):
 	if val > high_score[played_character][played_difficulty]:
