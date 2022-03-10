@@ -26,10 +26,12 @@ const UNLOCKABLE_CHAR = [CHARACTER.BLUE]
 const UNLOCK_CHAR_REQ = {CHARACTER.BLUE: [150, CHARACTER.RED, DIFFICULTY.NORMAL]}
 
 var SaveHandler
+var MusicPlayer
 var high_score = {}
 var unlocked_characters = []
 var sound_mute = false
 var sound_shift = false
+var music_enabled = true
 var interpolation = true
 var selected_difficulty = DIFFICULTY.NORMAL
 var selected_character = CHARACTER.GREEN
@@ -49,8 +51,9 @@ func _ready():
 			high_score[character_x][difficulty_x] = 0
 	SaveHandler.load_data()
 	var MusicPlayerClass = load("res://scenes/MusicPlayer.gd")
-	var MusicPlayer = MusicPlayerClass.new()
+	MusicPlayer = MusicPlayerClass.new()
 	add_child(MusicPlayer)
+	MusicPlayer.toggle_music(music_enabled)
 
 func highscore_set(val, played_character, played_difficulty, do_save = true):
 	if val > high_score[played_character][played_difficulty]:
@@ -68,6 +71,11 @@ func mute_set(val):
 
 func sfxshift_set(val):
 	sound_shift = val
+	SaveHandler.save_data()
+
+func musicenabled_set(val):
+	music_enabled = val
+	MusicPlayer.toggle_music(val)
 	SaveHandler.save_data()
 
 func interpolation_set(enable, do_save = true):
