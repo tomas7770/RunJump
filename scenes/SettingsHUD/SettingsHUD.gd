@@ -26,17 +26,11 @@ func _notification(what):
 
 func update_mute(muted):
 	var button = settings_list.get_node("SoundContainer").get_node("CheckButton")
-	if muted:
-		button.set_pressed_no_signal(false)
-	else:
-		button.set_pressed_no_signal(true)
+	button.set_pressed_no_signal(!muted)
 
 func update_sfxshift(enabled):
 	var button = settings_list.get_node("SFXShiftContainer").get_node("CheckButton")
-	if enabled:
-		button.set_pressed_no_signal(true)
-	else:
-		button.set_pressed_no_signal(false)
+	button.set_pressed_no_signal(enabled)
 
 func update_music(enabled):
 	var button = settings_list.get_node("MusicContainer").get_node("CheckButton")
