@@ -1,6 +1,7 @@
 extends Node
 
 signal on_pause
+signal on_bgplats_set
 
 const GAME_VERSION = "Dev Version (v0.4.0+)"
 enum DIFFICULTY {NORMAL, EASY, FAST}
@@ -32,6 +33,7 @@ var unlocked_characters = []
 var sound_mute = false
 var sound_shift = false
 var music_enabled = true
+var bg_plats = true
 var interpolation = true
 var selected_difficulty = DIFFICULTY.NORMAL
 var selected_character = CHARACTER.GREEN
@@ -76,6 +78,11 @@ func sfxshift_set(val):
 func musicenabled_set(val):
 	music_enabled = val
 	MusicPlayer.toggle_music(val)
+	SaveHandler.save_data()
+
+func bgplats_set(val):
+	bg_plats = val
+	emit_signal("on_bgplats_set", val)
 	SaveHandler.save_data()
 
 func interpolation_set(enable, do_save = true):

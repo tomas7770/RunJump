@@ -12,6 +12,7 @@ func _ready():
 	update_mute(GlobalVariables.sound_mute)
 	update_sfxshift(GlobalVariables.sound_shift)
 	update_music(GlobalVariables.music_enabled)
+	update_bg_plats(GlobalVariables.bg_plats)
 	update_interp(GlobalVariables.interpolation)
 	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION
 	main_settings.popup()
@@ -36,6 +37,10 @@ func update_music(enabled):
 	var button = settings_list.get_node("MusicContainer").get_node("CheckButton")
 	button.set_pressed_no_signal(enabled)
 
+func update_bg_plats(enabled):
+	var button = settings_list.get_node("BGContainer").get_node("CheckButton")
+	button.set_pressed_no_signal(enabled)
+
 func update_interp(enabled):
 	adv_settings_list.get_node("InterpContainer").get_node("CheckButton").set_pressed_no_signal(enabled)
 
@@ -50,6 +55,9 @@ func _on_SFXShiftButton_toggled(button_pressed):
 
 func _on_MusicButton_toggled(button_pressed):
 	GlobalVariables.musicenabled_set(button_pressed)
+
+func _on_BGButton_toggled(button_pressed):
+	GlobalVariables.bgplats_set(button_pressed)
 
 func _on_InterpButton_toggled(button_pressed):
 	GlobalVariables.interpolation_set(button_pressed)

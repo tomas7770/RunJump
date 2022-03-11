@@ -103,6 +103,8 @@ func load_data():
 			GlobalVariables.sound_mute = config.get_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
 			GlobalVariables.sound_shift = config.get_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
 			GlobalVariables.music_enabled = config.get_value(CONFIG_SECTION, "music_enabled", GlobalVariables.music_enabled)
+			GlobalVariables.bgplats_set(config.get_value(CONFIG_SECTION, "bg_plats", \
+											GlobalVariables.bg_plats))
 			GlobalVariables.interpolation_set(config.get_value(CONFIG_SECTION, "interpolation", \
 											GlobalVariables.interpolation), false)
 		_:
@@ -124,5 +126,6 @@ func save_data():
 	config.set_value(CONFIG_SECTION, "sound_mute", GlobalVariables.sound_mute)
 	config.set_value(CONFIG_SECTION, "sound_shift", GlobalVariables.sound_shift)
 	config.set_value(CONFIG_SECTION, "music_enabled", GlobalVariables.music_enabled)
+	config.set_value(CONFIG_SECTION, "bg_plats", GlobalVariables.bg_plats)
 	config.set_value(CONFIG_SECTION, "interpolation", GlobalVariables.interpolation)
 	config.save(SAVE_PATH)

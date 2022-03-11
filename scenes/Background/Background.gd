@@ -1,3 +1,4 @@
+#warning-ignore-all:return_value_discarded
 extends Control
 
 const LAYER_DIST = {
@@ -11,12 +12,11 @@ var screen_size
 func _ready():
 	main = get_parent()
 	screen_size = main.screen_size
-	# warning-ignore:return_value_discarded
+	_on_bgplats_set(GlobalVariables.bg_plats)
 	$Layer1/SpawnTimer.connect("timeout", self, "_on_SpawnTimer_timeout", [$Layer1/SpawnTimer])
-	# warning-ignore:return_value_discarded
 	$Layer2/SpawnTimer.connect("timeout", self, "_on_SpawnTimer_timeout", [$Layer2/SpawnTimer])
-	# warning-ignore:return_value_discarded
 	GlobalVariables.connect("on_pause", self, "_on_pause")
+	GlobalVariables.connect("on_bgplats_set", self, "_on_bgplats_set")
 
 func _physics_process(delta):
 	if !(GlobalVariables.pause):
@@ -32,6 +32,10 @@ func _on_pause(pause):
 	for layer in layers:
 		var timer = layer.get_node("SpawnTimer")
 		timer.set_paused(pause)
+
+func _on_bgplats_set(enabled):
+	$Layer1.visible = enabled
+	$Layer2.visible = enabled
 
 func _get_next_plat_size():
 	return Vector2(1+randi()%5, 1+randi()%5) # 1-5

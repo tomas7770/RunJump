@@ -91,7 +91,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer"]
 margin_right = 285.0
-margin_bottom = 360.0
+margin_bottom = 432.0
 custom_constants/separation = 16
 
 [node name="SoundContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
@@ -159,11 +159,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 285.0
+margin_bottom = 272.0
+
+[node name="Label" type="Label" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer"]
+margin_top = 8.0
+margin_right = 173.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 10 )
+text = "BG Plats"
+clip_text = true
+
+[node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer"]
+margin_left = 177.0
+margin_right = 285.0
+margin_bottom = 56.0
+custom_styles/focus = SubResource( 12 )
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ColorButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_left = 13.0
-margin_top = 216.0
+margin_top = 288.0
 margin_right = 271.0
-margin_bottom = 280.0
+margin_bottom = 352.0
 rect_min_size = Vector2( 258, 64 )
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 3 )
@@ -174,9 +198,9 @@ __meta__ = {
 
 [node name="AdvButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_left = 13.0
-margin_top = 296.0
+margin_top = 368.0
 margin_right = 271.0
-margin_bottom = 360.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 258, 64 )
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 7 )
@@ -213,9 +237,6 @@ margin_bottom = -90.0
 custom_fonts/font = SubResource( 5 )
 align = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorSettings" type="PopupDialog" parent="HUD_Container"]
 anchor_left = 0.5
@@ -346,6 +367,7 @@ __meta__ = {
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SoundContainer/CheckButton" to="." method="_on_MuteButton_toggled"]
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SFXShiftContainer/CheckButton" to="." method="_on_SFXShiftButton_toggled"]
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/MusicContainer/CheckButton" to="." method="_on_MusicButton_toggled"]
+[connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer/CheckButton" to="." method="_on_BGButton_toggled"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/ColorButton" to="." method="_on_ColorButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/AdvButton" to="." method="_on_AdvButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/CloseButton" to="." method="_on_CloseButton_pressed"]
