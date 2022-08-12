@@ -25,6 +25,7 @@ var game_over = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_add_player()
+	_add_background()
 	new_game()
 	GlobalVariables.connect("on_pause", self, "_on_pause")
 
@@ -35,6 +36,12 @@ func _add_player():
 		force_plat_color = player.plat_color
 	add_child(player)
 	move_child(player, 0)
+
+func _add_background():
+	var background = GlobalVariables.passed_background
+	GlobalVariables.passed_background = null
+	add_child(background)
+	background.on_game_start()
 
 func _get_next_plat_size():
 	match current_difficulty:

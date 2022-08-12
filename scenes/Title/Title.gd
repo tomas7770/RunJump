@@ -12,7 +12,13 @@ func _unhandled_input(event):
 		return
 	if event is InputEventMouseButton:  
 		if event.pressed:
-			get_tree().change_scene("res://scenes/Main/Main.tscn")
+			_start_game()
+
+func _start_game():
+	var background = $Background
+	remove_child(background)
+	GlobalVariables.passed_background = background
+	get_tree().change_scene("res://scenes/Main/Main.tscn")
 
 func _update_colors():
 	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)

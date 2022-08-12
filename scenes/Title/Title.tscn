@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Title/Title.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TitleHUD/TitleHUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/FakePlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Platform/Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Background/Background.tscn" type="PackedScene" id=5]
 
 [node name="Title" type="Control"]
 anchor_left = 0.5
@@ -24,3 +25,5 @@ position = Vector2( 128, 598 )
 [node name="Platform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 256, 758 )
 scale = Vector2( 8, 3 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]

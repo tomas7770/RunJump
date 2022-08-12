@@ -17,7 +17,6 @@ z_index = -1
 [node name="SpawnTimer" type="Timer" parent="Layer1"]
 process_mode = 0
 one_shot = true
-autostart = true
 
 [node name="Layer2" type="Node2D" parent="."]
 modulate = Color( 0.16, 0.16, 0.16, 1 )
@@ -26,4 +25,3 @@ z_index = -2
 [node name="SpawnTimer" type="Timer" parent="Layer2"]
 process_mode = 0
 one_shot = true
-autostart = true

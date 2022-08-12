@@ -41,6 +41,9 @@ var selected_character = CHARACTER.GREEN
 # warning-ignore:unused_class_variable
 var pause = false setget pause_set
 
+# "Hack" to pass background from title to game scene
+var passed_background
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
