@@ -5,13 +5,12 @@ const LAYER_DIST = {
 	"Layer1": 2,
 	"Layer2": 4,
 }
+const SCREEN_SIZE = GlobalVariables.SCREEN_SIZE
 export (PackedScene) var BGPlat
 var main
-var screen_size
 
 func _ready():
 	main = get_parent()
-	screen_size = main.screen_size
 	_on_bgplats_set(GlobalVariables.bg_plats)
 	$Layer1/SpawnTimer.connect("timeout", self, "_on_SpawnTimer_timeout", [$Layer1/SpawnTimer])
 	$Layer2/SpawnTimer.connect("timeout", self, "_on_SpawnTimer_timeout", [$Layer2/SpawnTimer])
@@ -51,6 +50,6 @@ func _on_SpawnTimer_timeout(timer):
 	plat_size.x /= LAYER_DIST[layer.name]
 	plat_size.y += 5*LAYER_DIST[layer.name]/4
 	plat.bodyscale = plat_size
-	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	plat.bodyposition = Vector2(SCREEN_SIZE.x+32*plat.bodyscale.x,SCREEN_SIZE.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
 	timer.start(LAYER_DIST[layer.name]*plat.bodyscale.x/(2.0*(main.speed/main.distance_scale)))

@@ -3,6 +3,7 @@ extends Control
 
 const DIFFICULTY = GlobalVariables.DIFFICULTY
 const CHARACTER = GlobalVariables.CHARACTER
+const SCREEN_SIZE = GlobalVariables.SCREEN_SIZE
 export (PackedScene) var Platform
 export var initial_speed = 250
 export var default_speed_increment = 2
@@ -13,7 +14,6 @@ export var distance_scale = 200.0
 var rng = RandomNumberGenerator.new()
 var player
 var force_plat_color
-var screen_size = Vector2(480,854)
 var score
 var speed
 var last_height
@@ -87,7 +87,7 @@ func new_game():
 		plat.set_color(force_plat_color)
 	add_child(plat)
 	plat.bodyscale = Vector2(8,initial_height)
-	plat.bodyposition = Vector2(32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	plat.bodyposition = Vector2(32*plat.bodyscale.x,SCREEN_SIZE.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
 	$SpawnTimer.set_paused(false)
 	$SpawnTimer.start(1.5*distance_scale/speed)
@@ -98,7 +98,7 @@ func _physics_process(delta):
 		var plats = get_tree().get_nodes_in_group("Platforms")
 		for platX in plats:
 			platX.bodyposition.x -= speed*delta
-		if player.bodyposition.y-64 > screen_size.y:
+		if player.bodyposition.y-64 > SCREEN_SIZE.y:
 			game_over = true
 			GlobalVariables.pause = true
 			player.queue_free()
@@ -129,7 +129,7 @@ func _on_SpawnTimer_timeout():
 	add_child(plat)
 	plat.bodyscale = _get_next_plat_size()
 	last_height = plat.bodyscale.y
-	plat.bodyposition = Vector2(screen_size.x+32*plat.bodyscale.x,screen_size.y-32*plat.bodyscale.y)
+	plat.bodyposition = Vector2(SCREEN_SIZE.x+32*plat.bodyscale.x,SCREEN_SIZE.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
 	$SpawnTimer.start(plat.bodyscale.x/(2.0*(speed/distance_scale)))
 
