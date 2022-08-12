@@ -28,8 +28,9 @@ func _physics_process(delta):
 
 func on_game_start():
 	main = get_parent()
-	_start_timers()
-	game_started = true
+	if !game_started:
+		_start_timers()
+		game_started = true
 
 func _start_timers():
 	var layers = get_children()

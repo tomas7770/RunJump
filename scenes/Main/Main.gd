@@ -13,6 +13,7 @@ export var distance_scale = 200.0
 # Use separate RNG to prevent game logic from being affected by other RNG calls
 var rng = RandomNumberGenerator.new()
 var player
+var background
 var force_plat_color
 var score
 var speed
@@ -38,8 +39,7 @@ func _add_player():
 	move_child(player, 0)
 
 func _add_background():
-	var background = GlobalVariables.passed_background
-	GlobalVariables.passed_background = null
+	background = GlobalVariables.passed_background
 	add_child(background)
 	background.on_game_start()
 
@@ -152,4 +152,5 @@ func _on_PreparationTimer_timeout():
 	$ScoreTimer.set_paused(GlobalVariables.pause)
 
 func _exit_tree():
+	remove_child(background)
 	GlobalVariables.highscore_set(score, current_character, current_difficulty)
