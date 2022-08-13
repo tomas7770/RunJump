@@ -6,6 +6,9 @@ var bodyposition setget _set_body_position, _get_body_position
 var bodyscale setget _set_body_scale, _get_body_scale
 onready var body = $Body
 
+# This is used for background platforms
+var destroy_on_hide = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	prevposition = body.position
@@ -23,7 +26,8 @@ func _physics_process(_delta):
 		prevposition = body.position
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	if destroy_on_hide:
+		queue_free()
 
 func _on_Body_screen_exited():
 	body.get_node("CollisionShape2D").set_deferred("disabled", true)
