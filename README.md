@@ -4,6 +4,6 @@ A simple mobile game made in [Godot Engine](https://godotengine.org/) and named 
 
 To jump, click/tap the screen. Hold the click/tap to jump higher.
 
-**Target Godot version:** 3.4.3
+**Target Godot version:** 3.5
 
 **Also available at:** [Game Jolt](https://gamejolt.com/games/runjump/439424)
