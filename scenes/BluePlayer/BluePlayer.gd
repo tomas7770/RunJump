@@ -27,8 +27,6 @@ func _ready():
 	var energy_hud = energy_hud_scene.instance()
 	get_parent().add_child(energy_hud)
 	energy_bar = energy_hud.get_node("HUD_Container/ProgressBar")
-	# warning-ignore:return_value_discarded
-	GlobalVariables.connect("on_pause", self, "_on_pause")
 
 func _process(_delta):
 	if GlobalVariables.interpolation:
@@ -38,21 +36,21 @@ func _process(_delta):
 
 func _on_physics_process(delta):
 	prevposition = body.position
-	if !(GlobalVariables.pause):
-		if isFlying:
-			var fly_acceleration = fly_acceleration_recovery if velocity.y > 0 else fly_acceleration_upward
-			velocity.y = max(velocity.y-fly_acceleration*delta, -max_fly_velocity)
-			_set_energy(energy-20.0*delta)
-			if energy <= 0.0:
-				_set_energy(0.0)
-				_stop_jump()
-		else:
-			velocity.y += delta * gravity
-		velocity = body.move_and_slide(velocity,Vector2(0,-1))
-		if body.position.y < top_limit:
-			body.position.y = top_limit
-		if body.is_on_floor():
-			_set_energy(min(energy+20.0*delta, max_energy))
+	
+	if isFlying:
+		var fly_acceleration = fly_acceleration_recovery if velocity.y > 0 else fly_acceleration_upward
+		velocity.y = max(velocity.y-fly_acceleration*delta, -max_fly_velocity)
+		_set_energy(energy-20.0*delta)
+		if energy <= 0.0:
+			_set_energy(0.0)
+			_stop_jump()
+	else:
+		velocity.y += delta * gravity
+	velocity = body.move_and_slide(velocity,Vector2(0,-1))
+	if body.position.y < top_limit:
+		body.position.y = top_limit
+	if body.is_on_floor():
+		_set_energy(min(energy+20.0*delta, max_energy))
 
 func _physics_process(delta):
 	_on_physics_process(delta)
@@ -80,22 +78,12 @@ func _stop_jump():
 	$JumpSound.stop()
 	$JumpSound.seek(-1)
 
-func _on_pause(pause):
-	if pause:
-		# Hack to prevent particles from disappearing
-		# and not resuming processing until emitting again
-		$Sprite/Particles.emitting = true
-	else:
-		$Sprite/Particles.emitting = isFlying
-	$Sprite/Particles.speed_scale = 0 if pause else 1
-
 func _unhandled_input(event):  
-	if !(GlobalVariables.pause):
-		if event is InputEventMouseButton:  
-			if event.pressed:  
-				_on_jump_start()
-			if !(event.pressed):
-				_on_jump_release()
+	if event is InputEventMouseButton:  
+		if event.pressed:  
+			_on_jump_start()
+		if !(event.pressed):
+			_on_jump_release()
 
 func _set_body_position(pos):
 	body.position = pos

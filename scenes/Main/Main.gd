@@ -28,7 +28,6 @@ func _ready():
 	_add_player()
 	_add_background()
 	new_game()
-	GlobalVariables.connect("on_pause", self, "_on_pause")
 
 func _add_player():
 	var player_scene = GlobalVariables.load_character_scene(GlobalVariables.selected_character)
@@ -101,7 +100,7 @@ func new_game():
 	$PreparationTimer.start()
 
 func _physics_process(delta):
-	if !(GlobalVariables.pause) and !game_over:
+	if !game_over:
 		var plats = get_tree().get_nodes_in_group("Platforms")
 		for platX in plats:
 			platX.bodyposition.x -= speed*delta
@@ -114,20 +113,6 @@ func _physics_process(delta):
 				$HUD.newhighscore(old_highscore, score)
 			GlobalVariables.highscore_set(score, current_character, current_difficulty)
 			$HUD.game_over()
-
-func _on_pause(pause):
-	if game_over and !pause:
-		# Don't unpause timers after game over
-		return
-	$SpawnTimer.set_paused(pause)
-	if pause:
-		$ScoreTimer.set_paused(true)
-		$PreparationTimer.set_paused(true)
-	else:
-		if in_preparation:
-			$PreparationTimer.set_paused(false)
-		else:
-			$ScoreTimer.set_paused(false)
 
 func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()

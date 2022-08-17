@@ -22,13 +22,13 @@ func _process(_delta):
 
 func _on_physics_process(delta):
 	prevposition = body.position
-	if !(GlobalVariables.pause):
-		velocity.y += delta * gravity
-		velocity = body.move_and_slide(velocity,Vector2(0,-1))
-		if velocity:
-			canJump = false
-		else:
-			canJump = true
+	
+	velocity.y += delta * gravity
+	velocity = body.move_and_slide(velocity,Vector2(0,-1))
+	if velocity:
+		canJump = false
+	else:
+		canJump = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -48,12 +48,11 @@ func _on_jump_release():
 		velocity.y *= stop_jump_factor
 
 func _unhandled_input(event):  
-	if !(GlobalVariables.pause):
-		if event is InputEventMouseButton:  
-			if event.pressed and canJump:  
-				_on_jump_start()
-			if !(event.pressed):
-				_on_jump_release()
+	if event is InputEventMouseButton:  
+		if event.pressed and canJump:  
+			_on_jump_start()
+		if !(event.pressed):
+			_on_jump_release()
 
 func _set_body_position(pos):
 	body.position = pos

@@ -1,6 +1,5 @@
 extends Node
 
-signal on_pause
 signal on_bgplats_set
 
 const SCREEN_SIZE = Vector2(480,854)
@@ -101,7 +100,7 @@ func interpolation_set(enable, do_save = true):
 
 func pause_set(val):
 	pause = val
-	emit_signal("on_pause", pause)
+	get_tree().paused = val
 
 func resize_control_toSafeArea(control):
 	# Resizes a fullscreen Control to fit window safe area
