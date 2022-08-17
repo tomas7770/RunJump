@@ -11,5 +11,5 @@ dest_files=[ "res://.import/fasttheme.mp3-96c3aa664729259962ab83e5123091b7.mp3st
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

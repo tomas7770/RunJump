@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/upbeatoverworld.mp3-6b538e3d83d64f0cc35eb1433c25f728.mp3str"
+
+[deps]
+
+source_file="res://sounds/music/upbeatoverworld.mp3"
+dest_files=[ "res://.import/upbeatoverworld.mp3-6b538e3d83d64f0cc35eb1433c25f728.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
