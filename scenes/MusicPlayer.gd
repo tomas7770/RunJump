@@ -22,6 +22,9 @@ func toggle_music(enabled):
 		music.stop()
 
 func _on_finished():
+	if !GlobalVariables.music_enabled:
+		return
+	
 	current_track += 1
 	if current_track > track_list.size()-1:
 		current_track = 0
