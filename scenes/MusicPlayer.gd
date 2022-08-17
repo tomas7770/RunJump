@@ -5,7 +5,7 @@ const track_list = [
 	"res://sounds/music/upbeatoverworld.mp3"
 ]
 
-var current_track = 0
+var current_track = randi() % track_list.size()
 var music
 
 func _ready():
