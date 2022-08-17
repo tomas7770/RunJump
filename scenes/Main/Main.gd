@@ -106,6 +106,9 @@ func _physics_process(delta):
 			platX.bodyposition.x -= speed*delta
 		if player.bodyposition.y-64 > SCREEN_SIZE.y:
 			game_over = true
+			$SpawnTimer.stop()
+			$ScoreTimer.stop()
+			$PreparationTimer.stop()
 			GlobalVariables.pause = true
 			player.queue_free()
 			var old_highscore = GlobalVariables.highscore_get()
