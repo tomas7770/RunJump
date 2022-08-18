@@ -49,6 +49,7 @@ func _get_body_scale():
 
 func reset_interpolation():
 	prevposition = body.position
+	$Sprite.position = body.position
 
 func set_color(color):
 	$Sprite.modulate = color
