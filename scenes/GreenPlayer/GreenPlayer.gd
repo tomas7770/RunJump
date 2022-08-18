@@ -6,7 +6,7 @@ enum JUMP_ANIM_STATE {FREE, HIGH_WAIT, LOW_WAIT}
 var gravity = 2000
 var jump_velocity = 1200
 var stop_jump_factor = 0.35
-var land_particles_speed_threshold = 1200
+var land_particles_speed_threshold = 1000
 var velocity = Vector2()
 var canJump = false
 var has_jumped = false
