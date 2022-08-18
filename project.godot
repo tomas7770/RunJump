@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "GreenPlayer",
 "language": "GDScript",
 "path": "res://scenes/GreenPlayer/GreenPlayer.gd"
+}, {
+"base": "Node2D",
+"class": "Platform",
+"language": "GDScript",
+"path": "res://scenes/Platform/Platform.gd"
 } ]
 _global_script_class_icons={
-"GreenPlayer": ""
+"GreenPlayer": "",
+"Platform": ""
 }
 
 [application]

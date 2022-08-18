@@ -6,10 +6,12 @@ enum JUMP_ANIM_STATE {FREE, HIGH_WAIT, LOW_WAIT}
 var gravity = 2000
 var jump_velocity = 1200
 var stop_jump_factor = 0.35
+var land_particles_speed_threshold = 1200
 var velocity = Vector2()
 var canJump = false
 var has_jumped = false
 var has_dropped_off = false
+var has_landed = true
 var prevposition: Vector2
 var bodyposition setget _set_body_position, _get_body_position
 onready var body = $Body
@@ -38,10 +40,12 @@ func _on_physics_process(delta):
 	prevposition = body.position
 	
 	velocity.y += delta * gravity
+	var prev_velocity = velocity
 	velocity = body.move_and_slide(velocity,Vector2(0,-1))
 	if velocity:
 		# On air
 		canJump = false
+		has_landed = false
 		if velocity.y > 0 and !has_jumped:
 			if !has_dropped_off:
 				jump_anim_state = JUMP_ANIM_STATE.FREE
@@ -55,6 +59,10 @@ func _on_physics_process(delta):
 		canJump = true
 		has_jumped = false
 		has_dropped_off = false
+		if !has_landed:
+			if prev_velocity.y >= land_particles_speed_threshold:
+				_emit_land_particles()
+			has_landed = true
 		if jump_anim_state == JUMP_ANIM_STATE.LOW_WAIT:
 			jump_anim_state = JUMP_ANIM_STATE.FREE
 			anim_player.play()
@@ -62,6 +70,13 @@ func _on_physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	_on_physics_process(delta)
+
+func _emit_land_particles():
+	for i in body.get_slide_count():
+		var collision = body.get_slide_collision(i)
+		var collider = collision.collider
+		if collider.get_parent() is Platform:
+			collider.get_parent().emit_land_particles(body.position + Vector2(0,64))
 
 func _on_jump_start():
 	velocity.y -= jump_velocity

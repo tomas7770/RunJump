@@ -89,9 +89,9 @@ func new_game():
 		platX.queue_free()
 	rng.randomize()
 	var plat = Platform.instance()
+	add_child(plat)
 	if force_plat_color:
 		plat.set_color(force_plat_color)
-	add_child(plat)
 	plat.bodyscale = Vector2(8,initial_height)
 	plat.bodyposition = Vector2(32*plat.bodyscale.x,SCREEN_SIZE.y-32*plat.bodyscale.y)
 	plat.reset_interpolation()
