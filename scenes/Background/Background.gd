@@ -6,8 +6,8 @@ const LAYER_DIST = {
 	"Layer2": 4,
 }
 const LAYER_COLORS = {
-	"Layer1": Color(0.33, 0.33, 0.33, 1.00),
-	"Layer2": Color(0.16, 0.16, 0.16, 1.00),
+	"Layer1": Color(0.44, 0.44, 0.44, 1.00),
+	"Layer2": Color(0.24, 0.24, 0.24, 1.00),
 }
 const SCREEN_SIZE = GlobalVariables.SCREEN_SIZE
 export (PackedScene) var BGPlat

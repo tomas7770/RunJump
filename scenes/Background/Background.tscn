@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 BGPlat = ExtResource( 2 )
 
 [node name="Layer1" type="Node2D" parent="."]
-modulate = Color( 0.33, 0.33, 0.33, 1 )
+modulate = Color( 0.439216, 0.439216, 0.439216, 1 )
 z_index = -1
 
 [node name="SpawnTimer" type="Timer" parent="Layer1"]
@@ -19,7 +19,7 @@ process_mode = 0
 one_shot = true
 
 [node name="Layer2" type="Node2D" parent="."]
-modulate = Color( 0.16, 0.16, 0.16, 1 )
+modulate = Color( 0.239216, 0.239216, 0.239216, 1 )
 z_index = -2
 
 [node name="SpawnTimer" type="Timer" parent="Layer2"]
