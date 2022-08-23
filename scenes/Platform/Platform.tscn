@@ -46,6 +46,7 @@ rect = Rect2( -32, -32, 64, 64 )
 scale = Vector2( 2, 2 )
 z_index = 1
 emitting = false
+amount = 4
 lifetime = 0.75
 one_shot = true
 explosiveness = 1.0
