@@ -2,7 +2,8 @@ extends Node
 
 const track_list = [
 	"res://sounds/music/fasttheme.mp3",
-	"res://sounds/music/upbeatoverworld.mp3"
+	"res://sounds/music/upbeatoverworld.mp3",
+	"res://sounds/music/wyver9_FastLevel.mp3",
 ]
 
 var current_track = randi() % track_list.size()
