@@ -50,6 +50,9 @@ func _on_TitleButton_pressed():
 	get_tree().change_scene("res://scenes/Title/Title.tscn")
 	GlobalVariables.pause = false
 
+func _on_pauseTitleButton_pressed():
+	$HUD_Container/ConfirmTitleDialog.popup()
+
 func _on_RetryButton_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/Main/Main.tscn")
@@ -63,3 +66,6 @@ func _on_ContinueButton_pressed():
 func _on_SettingsButton_pressed():
 	loaded_settings_hud = SETTINGS_HUD.instance()
 	add_child(loaded_settings_hud)
+
+func _on_AbortTitleButton_pressed():
+	$HUD_Container/ConfirmTitleDialog.visible = false

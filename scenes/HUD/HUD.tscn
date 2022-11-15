@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -28,6 +28,14 @@ size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=6]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 50
 font_data = ExtResource( 2 )
 
@@ -315,13 +323,65 @@ anims/PauseInfoFade = ExtResource( 3 )
 [node name="InfoFadeTimer" type="Timer" parent="HUD_Container/PausePopup"]
 wait_time = 2.0
 
+[node name="ConfirmTitleDialog" type="PopupDialog" parent="HUD_Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -100.0
+margin_right = 200.0
+margin_bottom = 100.0
+popup_exclusive = true
+
+[node name="Label" type="Label" parent="HUD_Container/ConfirmTitleDialog"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -164.0
+margin_top = 15.0
+margin_right = 164.0
+margin_bottom = 95.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 7 )
+text = "Are you sure?"
+align = 1
+
+[node name="AbortTitleButton" type="Button" parent="HUD_Container/ConfirmTitleDialog"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_top = -100.0
+margin_right = -34.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 8 )
+text = "No"
+
+[node name="ConfirmTitleButton" type="Button" parent="HUD_Container/ConfirmTitleDialog"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -100.0
+margin_right = 134.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 8 )
+text = "Yes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="HUD_Container/PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="HUD_Container/GameOver/TitleButton" to="." method="_on_TitleButton_pressed"]
 [connection signal="pressed" from="HUD_Container/GameOver/RetryButton" to="." method="_on_RetryButton_pressed"]
 [connection signal="pressed" from="HUD_Container/GameOver/LabelSwitchButton" to="HUD_Container/GameOver" method="_on_LabelSwitchButton_pressed"]
 [connection signal="timeout" from="HUD_Container/GameOver/InfoFadeTimer" to="HUD_Container/GameOver" method="_on_InfoFadeTimer_timeout"]
 [connection signal="pressed" from="HUD_Container/PausePopup/ContinueButton" to="." method="_on_ContinueButton_pressed"]
-[connection signal="pressed" from="HUD_Container/PausePopup/TitleButton2" to="." method="_on_TitleButton_pressed"]
+[connection signal="pressed" from="HUD_Container/PausePopup/TitleButton2" to="." method="_on_pauseTitleButton_pressed"]
 [connection signal="pressed" from="HUD_Container/PausePopup/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="HUD_Container/PausePopup/LabelSwitchButton" to="HUD_Container/PausePopup" method="_on_LabelSwitchButton_pressed"]
 [connection signal="timeout" from="HUD_Container/PausePopup/InfoFadeTimer" to="HUD_Container/PausePopup" method="_on_InfoFadeTimer_timeout"]
+[connection signal="pressed" from="HUD_Container/ConfirmTitleDialog/AbortTitleButton" to="." method="_on_AbortTitleButton_pressed"]
+[connection signal="pressed" from="HUD_Container/ConfirmTitleDialog/ConfirmTitleButton" to="." method="_on_TitleButton_pressed"]
