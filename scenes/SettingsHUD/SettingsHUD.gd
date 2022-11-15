@@ -6,6 +6,7 @@ onready var color_settings = $HUD_Container/ColorSettings
 onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 onready var adv_settings = $HUD_Container/AdvSettings
 onready var adv_settings_list = $HUD_Container/AdvSettings/ScrollContainer/VBoxContainer
+onready var credits = $HUD_Container/Credits
 
 func _ready():
 	GlobalVariables.resize_control_toSafeArea($HUD_Container)
@@ -73,10 +74,15 @@ func _on_AdvButton_pressed():
 	adv_settings.popup()
 	main_settings.hide()
 
+func _on_CreditsButton_pressed():
+	credits.popup()
+	main_settings.hide()
+
 func _on_BackButton_pressed():
 	main_settings.popup()
 	color_settings.hide()
 	adv_settings.hide()
+	credits.hide()
 
 func _on_ColorPicker_color_changed(color):
 	VisualServer.set_default_clear_color(color)
