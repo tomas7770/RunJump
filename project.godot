@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Player",
 "class": "GreenPlayer",
 "language": "GDScript",
 "path": "res://scenes/GreenPlayer/GreenPlayer.gd"
@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Platform",
 "language": "GDScript",
 "path": "res://scenes/Platform/Platform.gd"
+}, {
+"base": "Node2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/Player.gd"
 } ]
 _global_script_class_icons={
 "GreenPlayer": "",
-"Platform": ""
+"Platform": "",
+"Player": ""
 }
 
 [application]
