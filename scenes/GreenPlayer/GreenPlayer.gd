@@ -76,7 +76,7 @@ func _emit_land_particles():
 		var collision = body.get_slide_collision(i)
 		var collider = collision.collider
 		if collider.get_parent() is Platform:
-			collider.get_parent().emit_land_particles(body.position + Vector2(0,64))
+			collider.get_parent().emit_land_particles(body.global_position + Vector2(0,64))
 
 func _on_jump_start():
 	velocity.y -= jump_velocity

@@ -77,6 +77,5 @@ func emit_land_particles(collision_pos):
 		var x_offset = -15
 		if land_particles.name == "LandParticlesRight":
 			x_offset = 15
-		land_particles.position.x = collision_pos.x - land_particles.global_position.x + x_offset
-		land_particles.position.y = collision_pos.y - land_particles.global_position.y + 4
+		land_particles.position = particle_container.to_local(collision_pos + Vector2(x_offset, 4))
 		land_particles.emitting = true
