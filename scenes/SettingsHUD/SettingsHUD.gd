@@ -16,6 +16,7 @@ func _ready():
 	update_bg_plats(GlobalVariables.bg_plats)
 	update_interp(GlobalVariables.interpolation)
 	main_settings.get_node("VersionLabel").text = GlobalVariables.GAME_VERSION
+	adv_settings.get_node("EngineVersionLabel").text = "Godot " + Engine.get_version_info()["string"]
 	main_settings.popup()
 
 func _notification(what):
