@@ -8,9 +8,6 @@ var bodyscale setget _set_body_scale, _get_body_scale
 onready var body = $Body
 var particle_container
 
-# This is used for background platforms
-var destroy_on_hide = true
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	prevposition = body.position
@@ -34,11 +31,14 @@ func _physics_process(_delta):
 	else:
 		prevposition = body.position
 
-func _on_VisibilityNotifier2D_screen_exited():
-	if destroy_on_hide:
-		queue_free()
+func body_is_offscreen():
+	var hitbox = body.get_node("CollisionShape2D").shape
+	return body.position.x + body.scale.x*hitbox.extents.x < 0
 
-func _on_Body_screen_exited():
+func sprite_is_offscreen():
+	return $Sprite.position.x + body.scale.x*$Sprite.get_rect().size.x/2 < 0
+
+func on_Body_screen_exited():
 	body.get_node("CollisionShape2D").set_deferred("disabled", true)
 
 func _set_body_position(pos):

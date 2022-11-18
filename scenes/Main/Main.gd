@@ -104,6 +104,11 @@ func _physics_process(delta):
 		var plats = get_tree().get_nodes_in_group("Platforms")
 		for platX in plats:
 			platX.bodyposition.x -= speed*delta
+			if platX.body_is_offscreen():
+				if platX.sprite_is_offscreen():
+					platX.queue_free()
+				else:
+					platX.on_Body_screen_exited()
 		if player.bodyposition.y-64 > SCREEN_SIZE.y:
 			game_over = true
 			$SpawnTimer.stop()

@@ -17,7 +17,6 @@ func _unhandled_input(event):
 
 func _start_game():
 	var background = $Background
-	background.suspend_visibility_notifiers()
 	remove_child(background)
 	GlobalVariables.passed_background = background
 	get_tree().change_scene("res://scenes/Main/Main.tscn")

@@ -29,6 +29,8 @@ func _physics_process(delta):
 			for child in layer_children:
 				if child.name != "SpawnTimer":
 					child.bodyposition.x -= main.speed*delta/LAYER_DIST[layer.name]
+					if child.sprite_is_offscreen():
+						child.queue_free()
 
 func on_game_start():
 	main = get_parent()
@@ -37,7 +39,6 @@ func on_game_start():
 		# Restart
 		_generate_initial_plats()
 	else:
-		_resume_visibility_notifiers()
 		game_started = true
 
 func set_plat_color(color):
@@ -45,26 +46,13 @@ func set_plat_color(color):
 	for layer in layers:
 		layer.modulate = color*LAYER_COLORS[layer.name]
 
-# Must suspend the "destroy on hide" behavior of platforms when passing
-# from title to game, or else they're destroyed
-func suspend_visibility_notifiers():
-	var layers = get_children()
-	for layer in layers:
-		var layer_children = layer.get_children()
-		for child in layer_children:
-			if child.name != "SpawnTimer":
-				child.destroy_on_hide = false
-
-func _resume_visibility_notifiers():
-	var layers = get_children()
-	for layer in layers:
-		var layer_children = layer.get_children()
-		for child in layer_children:
-			if child.name != "SpawnTimer":
-				child.destroy_on_hide = true
-
 func _generate_initial_plats():
 	var layers = get_children()
+	for layer in layers:
+		var layer_children = layer.get_children()
+		for child in layer_children:
+			if child.name != "SpawnTimer":
+				child.queue_free()
 	for layer in layers:
 		var x_pos = 0
 		while x_pos < SCREEN_SIZE.x:
