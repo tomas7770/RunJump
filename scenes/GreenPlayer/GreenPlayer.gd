@@ -28,7 +28,7 @@ func _load_animations():
 func _on_physics_process(delta):
 	velocity.y += delta * gravity
 	var prev_velocity = velocity
-	velocity = body.move_and_slide(velocity,Vector2(0,-1))
+	velocity = move_and_collide_wrap(velocity, Vector2(0,-1))
 	if velocity:
 		# On air
 		canJump = false
@@ -55,8 +55,8 @@ func _on_physics_process(delta):
 			anim_player.play()
 
 func _emit_land_particles():
-	for i in body.get_slide_count():
-		var collision = body.get_slide_collision(i)
+	if last_collision:
+		var collision = last_collision
 		var collider = collision.collider
 		if collider.get_parent() is Platform:
 			collider.get_parent().emit_land_particles(body.global_position + Vector2(0,64))

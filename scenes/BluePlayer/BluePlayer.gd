@@ -33,10 +33,10 @@ func _on_physics_process(delta):
 			_stop_jump()
 	else:
 		velocity.y += delta * gravity
-	velocity = body.move_and_slide(velocity,Vector2(0,-1))
+	velocity = move_and_collide_wrap(velocity, Vector2(0,-1))
 	if body.position.y < top_limit:
 		body.position.y = top_limit
-	if body.is_on_floor():
+	if is_on_floor():
 		_set_energy(min(energy+20.0*delta, max_energy))
 
 func _on_jump_start():

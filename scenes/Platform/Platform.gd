@@ -1,15 +1,21 @@
 extends Node2D
 class_name Platform
 
+const BASE_SIZE = 32
+
 var prevposition: Vector2
 var body_moved = false
 var bodyposition setget _set_body_position, _get_body_position
-var bodyscale setget _set_body_scale, _get_body_scale
+var bodyscale = 1 setget _set_body_scale, _get_body_scale
 onready var body = $Body
 var particle_container
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var collision_shape = body.get_node_or_null("CollisionShape2D")
+	if collision_shape:
+		collision_shape.shape = collision_shape.shape.duplicate()
+	
 	prevposition = body.position
 	particle_container = get_node_or_null("ParticleContainer")
 	if particle_container:
@@ -33,10 +39,10 @@ func _physics_process(_delta):
 
 func body_is_offscreen():
 	var hitbox = body.get_node("CollisionShape2D").shape
-	return body.position.x + body.scale.x*hitbox.extents.x < 0
+	return body.position.x + hitbox.extents.x < 0
 
 func sprite_is_offscreen():
-	return $Sprite.position.x + body.scale.x*$Sprite.get_rect().size.x/2 < 0
+	return $Sprite.position.x + $Sprite.scale.x*$Sprite.get_rect().size.x/2 < 0
 
 func on_Body_screen_exited():
 	body.get_node("CollisionShape2D").set_deferred("disabled", true)
@@ -50,11 +56,14 @@ func _get_body_position():
 	return body.position
 
 func _set_body_scale(new_scale):
-	body.scale = new_scale
+	var collision_shape = body.get_node_or_null("CollisionShape2D")
+	if collision_shape:
+		collision_shape.shape.extents = BASE_SIZE*new_scale
+	bodyscale = new_scale
 	$Sprite.scale = new_scale
 
 func _get_body_scale():
-	return body.scale
+	return bodyscale
 
 func reset_interpolation():
 	prevposition = body.position
