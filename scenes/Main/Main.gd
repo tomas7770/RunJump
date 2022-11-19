@@ -10,6 +10,7 @@ export var default_speed_increment = 2
 export var speed_cap = 700
 export var initial_height = 3
 export var distance_scale = 200.0
+onready var platforms = $Platforms
 # Use separate RNG to prevent game logic from being affected by other RNG calls
 var rng = RandomNumberGenerator.new()
 var player
@@ -34,6 +35,8 @@ func _add_player():
 	player = player_scene.instance()
 	if player.get("plat_color"):
 		force_plat_color = player.plat_color
+	if player.has_method("inject_platforms_node"):
+		player.inject_platforms_node(platforms)
 	add_child(player)
 	move_child(player, 0)
 
@@ -89,7 +92,7 @@ func new_game():
 		platX.queue_free()
 	rng.randomize()
 	var plat = Platform.instance()
-	add_child(plat)
+	platforms.add_child(plat)
 	if force_plat_color:
 		plat.set_color(force_plat_color)
 	plat.bodyscale = Vector2(8,initial_height)
@@ -126,7 +129,7 @@ func _on_SpawnTimer_timeout():
 	var plat = Platform.instance()
 	if force_plat_color:
 		plat.set_color(force_plat_color)
-	add_child(plat)
+	platforms.add_child(plat)
 	plat.bodyscale = _get_next_plat_size()
 	last_height = plat.bodyscale.y
 	plat.bodyposition = Vector2(SCREEN_SIZE.x+32*plat.bodyscale.x,SCREEN_SIZE.y-32*plat.bodyscale.y)
