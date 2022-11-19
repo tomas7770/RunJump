@@ -4,6 +4,9 @@ enum SAVE_VERSION {UNKNOWN = -1, LEGACY, v_0_4_0}
 const LATEST_SAVE_VERSION = SAVE_VERSION.v_0_4_0
 const SAVE_PATH = "user://savegame.save"
 
+const EXTERNAL_FOLDER_NAME = "RunJump"
+const EXPORT_SAVE_NAME = "export_savegame.save"
+
 const METADATA_SECTION = "MetaData"
 const SCORE_SECTION = "HighScores"
 const UNLOCK_SECTION = "Unlockable"
@@ -76,14 +79,16 @@ func _load_legacy_highscores():
 func _score_key(character_x, difficulty_x):
 	return str(character_x)+"_"+str(difficulty_x)
 
-func load_data():
+func load_data(path = SAVE_PATH):
 	var config = ConfigFile.new()
-	var err = config.load(SAVE_PATH)
+	var err = config.load(path)
 	if err != OK:
 		# Didn't load
-		if err == ERR_FILE_NOT_FOUND:
+		if err == ERR_FILE_NOT_FOUND and path == SAVE_PATH:
+			# Safe to unlock because there's no save to overwrite
 			save_locked = false
-		return
+		return err
+	GlobalVariables.reset_data()
 	var save_version = _identify_save_version(config)
 	save_locked = false
 	match save_version:
@@ -113,7 +118,7 @@ func load_data():
 			# TitleHUD will check for save_locked
 			save_locked = true
 
-func save_data():
+func save_data(path = SAVE_PATH):
 	if save_locked:
 		return
 	var config = ConfigFile.new()
@@ -128,4 +133,22 @@ func save_data():
 	config.set_value(CONFIG_SECTION, "music_enabled", GlobalVariables.music_enabled)
 	config.set_value(CONFIG_SECTION, "bg_plats", GlobalVariables.bg_plats)
 	config.set_value(CONFIG_SECTION, "interpolation", GlobalVariables.interpolation)
-	config.save(SAVE_PATH)
+	return config.save(path)
+
+func _create_external_folder():
+	var dir = Directory.new()
+	var folder_path = "%s/%s" % [OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, false), EXTERNAL_FOLDER_NAME]
+	if !dir.dir_exists(folder_path):
+		return dir.make_dir(folder_path)
+
+func export_save():
+	var err = _create_external_folder()
+	if err:
+		return err
+	return save_data("%s/%s/%s" % [OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, false), EXTERNAL_FOLDER_NAME, EXPORT_SAVE_NAME])
+
+func import_save():
+	var err = _create_external_folder()
+	if err:
+		return err
+	return load_data("%s/%s/%s" % [OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, false), EXTERNAL_FOLDER_NAME, EXPORT_SAVE_NAME])

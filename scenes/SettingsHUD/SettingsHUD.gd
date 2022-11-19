@@ -7,6 +7,9 @@ onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 onready var adv_settings = $HUD_Container/AdvSettings
 onready var adv_settings_list = $HUD_Container/AdvSettings/ScrollContainer/VBoxContainer
 onready var credits = $HUD_Container/Credits
+onready var error_dialog = $HUD_Container/ErrorDialog
+onready var error_label = $HUD_Container/ErrorDialog/Label
+onready var error_label_save = $HUD_Container/ErrorDialog/Label2
 
 func _ready():
 	GlobalVariables.resize_control_toSafeArea($HUD_Container)
@@ -92,3 +95,44 @@ func _on_DefaultButton_pressed():
 	var color = ProjectSettings.get_setting("rendering/environment/default_clear_color")
 	color_picker.set_pick_color(color)
 	VisualServer.set_default_clear_color(color)
+
+func _on_ExportSaveButton_pressed():
+	$HUD_Container/ExportDialog.popup()
+
+func _on_ImportSaveButton_pressed():
+	$HUD_Container/ImportDialog.popup()
+
+func _on_AbortExportImportButton_pressed():
+	$HUD_Container/ExportDialog.hide()
+	$HUD_Container/ImportDialog.hide()
+	$HUD_Container/ImportDialog2.hide()
+
+func _on_ConfirmExportButton_pressed():
+	$HUD_Container/ExportDialog.hide()
+	var err = GlobalVariables.export_save()
+	if err:
+		error_label.text = "Error " + str(err)
+		error_label_save.visible = false
+		error_dialog.popup()
+
+func _on_ConfirmImportButton_pressed():
+	$HUD_Container/ImportDialog.hide()
+	$HUD_Container/ImportDialog2.popup()
+
+func _on_FinalConfirmImportButton_pressed():
+	$HUD_Container/ImportDialog2.hide()
+	var err = GlobalVariables.import_save()
+	if err:
+		if err == ERR_FILE_NOT_FOUND:
+			error_label.text = "File not found!"
+		else:
+			error_label.text = "Error " + str(err)
+		error_label_save.visible = true
+		error_dialog.popup()
+		return
+	GlobalVariables.pause = false
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://scenes/Title/Title.tscn")
+
+func _on_ErrorCloseButton_pressed():
+	error_dialog.hide()
