@@ -33,13 +33,13 @@ const UNLOCK_CHAR_REQ = {
 
 var SaveHandler
 var MusicPlayer
-var high_score
-var unlocked_characters
-var sound_mute
-var sound_shift
-var music_enabled
-var bg_plats
-var interpolation
+var high_score = {}
+var unlocked_characters = []
+var sound_mute = false
+var sound_shift = false
+var music_enabled = true
+var bg_plats = true
+var interpolation = true
 var selected_difficulty = DIFFICULTY.NORMAL
 var selected_character = CHARACTER.GREEN
 # warning-ignore:unused_class_variable
@@ -48,27 +48,17 @@ var pause = false setget pause_set
 # "Hack" to pass background from title to game scene
 var passed_background
 
-func reset_data():
-	high_score = {}
-	unlocked_characters = []
-	sound_mute = false
-	sound_shift = false
-	music_enabled = true
-	bg_plats = true
-	interpolation = true
-	# Fill default high scores
-	for character_x in CHARACTER.values():
-		high_score[character_x] = {}
-		for difficulty_x in DIFFICULTY.values():
-			high_score[character_x][difficulty_x] = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	var SaveHandlerClass = load("res://scenes/SaveHandler.gd")
 	SaveHandler = SaveHandlerClass.new()
 	add_child(SaveHandler)
-	reset_data()
+	# Fill default high scores
+	for character_x in CHARACTER.values():
+		high_score[character_x] = {}
+		for difficulty_x in DIFFICULTY.values():
+			high_score[character_x][difficulty_x] = 0
 	SaveHandler.load_data()
 	var MusicPlayerClass = load("res://scenes/MusicPlayer.gd")
 	MusicPlayer = MusicPlayerClass.new()
@@ -157,9 +147,3 @@ func _unlock_characters():
 
 func is_save_locked():
 	return SaveHandler.save_locked
-
-func export_save():
-	return SaveHandler.export_save()
-
-func import_save():
-	return SaveHandler.import_save()
