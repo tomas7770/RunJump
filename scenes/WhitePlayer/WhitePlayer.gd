@@ -11,16 +11,16 @@ var jumping = false
 var platforms
 onready var platforms_tween = $PlatformsTween
 
-var _first_frame = true
+var _first_frames = 2
 
 func inject_platforms_node(platforms_node):
 	platforms = platforms_node
 
 func _on_physics_process(delta):
-	if _first_frame:
+	if _first_frames > 0:
 		# Hack to prevent player velocity from exploding due to collision velocity
-		# being extreme in the first frame
-		_first_frame = false
+		# being extreme in the first few frames
+		_first_frames -= 1
 		return
 	velocity.y += delta * gravity
 	velocity = move_and_collide_wrap(velocity, Vector2(0,-1))
