@@ -69,43 +69,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -160.0
+margin_left = -180.0
 margin_top = -235.0
-margin_right = 160.0
+margin_right = 180.0
 margin_bottom = 235.0
 popup_exclusive = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HUD_Container/MainSettings"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -142.5
+margin_left = -168.5
 margin_top = 20.0
-margin_right = 142.5
+margin_right = 168.5
 margin_bottom = 350.0
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer"]
-margin_right = 285.0
-margin_bottom = 512.0
+margin_right = 325.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 325, 0 )
 custom_constants/separation = 16
 
 [node name="SoundContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-margin_right = 285.0
+margin_right = 325.0
 margin_bottom = 56.0
 
 [node name="Label" type="Label" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SoundContainer"]
-margin_right = 173.0
+margin_right = 213.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 9 )
 text = "SFX"
 
 [node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SoundContainer"]
-margin_left = 177.0
-margin_right = 285.0
+margin_left = 217.0
+margin_right = 325.0
 margin_bottom = 56.0
 custom_styles/focus = SubResource( 11 )
 pressed = true
@@ -115,20 +113,20 @@ __meta__ = {
 
 [node name="SFXShiftContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_top = 72.0
-margin_right = 285.0
+margin_right = 325.0
 margin_bottom = 128.0
 
 [node name="Label" type="Label" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SFXShiftContainer"]
 margin_top = 8.0
-margin_right = 173.0
+margin_right = 213.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 10 )
 text = "Pitch Shift"
 
 [node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SFXShiftContainer"]
-margin_left = 177.0
-margin_right = 285.0
+margin_left = 217.0
+margin_right = 325.0
 margin_bottom = 56.0
 custom_styles/focus = SubResource( 12 )
 __meta__ = {
@@ -137,19 +135,19 @@ __meta__ = {
 
 [node name="MusicContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_top = 144.0
-margin_right = 285.0
+margin_right = 325.0
 margin_bottom = 200.0
 
 [node name="Label" type="Label" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/MusicContainer"]
-margin_right = 173.0
+margin_right = 213.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 9 )
 text = "Music"
 
 [node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/MusicContainer"]
-margin_left = 177.0
-margin_right = 285.0
+margin_left = 217.0
+margin_right = 325.0
 margin_bottom = 56.0
 custom_styles/focus = SubResource( 11 )
 pressed = true
@@ -159,21 +157,21 @@ __meta__ = {
 
 [node name="BGContainer" type="HBoxContainer" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_top = 216.0
-margin_right = 285.0
+margin_right = 325.0
 margin_bottom = 272.0
 
 [node name="Label" type="Label" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer"]
 margin_top = 8.0
-margin_right = 173.0
+margin_right = 213.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 10 )
-text = "BG Plats"
+text = "Background"
 clip_text = true
 
 [node name="CheckButton" type="CheckButton" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer"]
-margin_left = 177.0
-margin_right = 285.0
+margin_left = 217.0
+margin_right = 325.0
 margin_bottom = 56.0
 custom_styles/focus = SubResource( 12 )
 pressed = true
@@ -182,10 +180,10 @@ __meta__ = {
 }
 
 [node name="AdvButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-margin_left = 13.0
-margin_top = 368.0
-margin_right = 271.0
-margin_bottom = 432.0
+margin_left = 33.0
+margin_top = 288.0
+margin_right = 291.0
+margin_bottom = 352.0
 rect_min_size = Vector2( 258, 64 )
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 7 )
@@ -196,10 +194,10 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-margin_left = 13.0
-margin_top = 448.0
-margin_right = 271.0
-margin_bottom = 512.0
+margin_left = 33.0
+margin_top = 368.0
+margin_right = 291.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 258, 64 )
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 7 )
