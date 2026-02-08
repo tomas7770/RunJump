@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/SettingsHUD/SettingsHUD.gd" type="Script" id=2]
@@ -30,20 +30,16 @@ font_data = ExtResource( 1 )
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 96, 48 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 48
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=7]
 size = 46
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 20
+[sub_resource type="DynamicFont" id=3]
+size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 48
+[sub_resource type="DynamicFont" id=5]
+size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=13]
@@ -185,19 +181,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
-margin_left = 13.0
-margin_top = 288.0
-margin_right = 271.0
-margin_bottom = 352.0
-rect_min_size = Vector2( 258, 64 )
-size_flags_horizontal = 4
-custom_fonts/font = SubResource( 3 )
-text = "BG Color"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AdvButton" type="Button" parent="HUD_Container/MainSettings/ScrollContainer/VBoxContainer"]
 margin_left = 13.0
 margin_top = 368.0
@@ -250,62 +233,6 @@ margin_bottom = -90.0
 custom_fonts/font = SubResource( 5 )
 align = 1
 clip_text = true
-
-[node name="ColorSettings" type="PopupDialog" parent="HUD_Container"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -190.0
-margin_top = -315.0
-margin_right = 190.0
-margin_bottom = 315.0
-rect_min_size = Vector2( 0, 630 )
-popup_exclusive = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorPicker" type="ColorPicker" parent="HUD_Container/ColorSettings"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 1.0
-margin_bottom = 1.0
-presets_enabled = false
-presets_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackButton" type="Button" parent="HUD_Container/ColorSettings"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -129.0
-margin_top = -80.0
-margin_right = 129.0
-margin_bottom = -16.0
-custom_fonts/font = SubResource( 6 )
-text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DefaultButton" type="Button" parent="HUD_Container/ColorSettings"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -129.0
-margin_top = -160.0
-margin_right = 129.0
-margin_bottom = -96.0
-custom_fonts/font = SubResource( 6 )
-text = "Default"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AdvSettings" type="PopupDialog" parent="HUD_Container"]
 anchor_left = 0.5
@@ -442,13 +369,9 @@ __meta__ = {
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/SFXShiftContainer/CheckButton" to="." method="_on_SFXShiftButton_toggled"]
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/MusicContainer/CheckButton" to="." method="_on_MusicButton_toggled"]
 [connection signal="toggled" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/BGContainer/CheckButton" to="." method="_on_BGButton_toggled"]
-[connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/ColorButton" to="." method="_on_ColorButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/AdvButton" to="." method="_on_AdvButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/ScrollContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="HUD_Container/MainSettings/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="color_changed" from="HUD_Container/ColorSettings/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
-[connection signal="pressed" from="HUD_Container/ColorSettings/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="HUD_Container/ColorSettings/DefaultButton" to="." method="_on_DefaultButton_pressed"]
 [connection signal="toggled" from="HUD_Container/AdvSettings/ScrollContainer/VBoxContainer/InterpContainer/CheckButton" to="." method="_on_InterpButton_toggled"]
 [connection signal="pressed" from="HUD_Container/AdvSettings/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="HUD_Container/Credits/BackButton" to="." method="_on_BackButton_pressed"]

@@ -2,8 +2,6 @@ extends CanvasLayer
 
 onready var main_settings = $HUD_Container/MainSettings
 onready var settings_list = $HUD_Container/MainSettings/ScrollContainer/VBoxContainer
-onready var color_settings = $HUD_Container/ColorSettings
-onready var color_picker = $HUD_Container/ColorSettings/ColorPicker
 onready var adv_settings = $HUD_Container/AdvSettings
 onready var adv_settings_list = $HUD_Container/AdvSettings/ScrollContainer/VBoxContainer
 onready var credits = $HUD_Container/Credits
@@ -47,7 +45,7 @@ func update_interp(enabled):
 	adv_settings_list.get_node("InterpContainer").get_node("CheckButton").set_pressed_no_signal(enabled)
 
 func _submenu_open():
-	return color_settings.visible or adv_settings.visible
+	return adv_settings.visible
 
 func _on_MuteButton_toggled(button_pressed):
 	GlobalVariables.mute_set(!button_pressed)
@@ -67,10 +65,6 @@ func _on_InterpButton_toggled(button_pressed):
 func _on_CloseButton_pressed():
 	queue_free()
 
-func _on_ColorButton_pressed():
-	color_settings.popup()
-	main_settings.hide()
-
 func _on_AdvButton_pressed():
 	adv_settings.popup()
 	main_settings.hide()
@@ -81,14 +75,5 @@ func _on_CreditsButton_pressed():
 
 func _on_BackButton_pressed():
 	main_settings.popup()
-	color_settings.hide()
 	adv_settings.hide()
 	credits.hide()
-
-func _on_ColorPicker_color_changed(color):
-	VisualServer.set_default_clear_color(color)
-
-func _on_DefaultButton_pressed():
-	var color = ProjectSettings.get_setting("rendering/environment/default_clear_color")
-	color_picker.set_pick_color(color)
-	VisualServer.set_default_clear_color(color)
