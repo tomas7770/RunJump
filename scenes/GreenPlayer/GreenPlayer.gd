@@ -14,6 +14,8 @@ var has_landed = true
 onready var anim_player = $AnimationPlayer
 var jump_anim_state = JUMP_ANIM_STATE.FREE
 
+var _first_frames = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_load_animations()
@@ -26,6 +28,10 @@ func _load_animations():
 	anim_player.add_animation("FallAnim", fall_anim)
 
 func _on_physics_process(delta):
+	if _first_frames > 0:
+		# Hack to prevent animations triggering in the first few frames
+		_first_frames -= 1
+		return
 	velocity.y += delta * gravity
 	var prev_velocity = velocity
 	velocity = move_and_collide_wrap(velocity, Vector2(0,-1))
