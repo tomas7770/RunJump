@@ -12,7 +12,9 @@ func _notification(what):
 	or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		if loaded_settings_hud and is_instance_valid(loaded_settings_hud):
 			return
-		if $HUD_Container/PausePopup.visible:
+		if $HUD_Container/ConfirmTitleDialog.visible:
+			_on_AbortTitleButton_pressed()
+		elif $HUD_Container/PausePopup.visible:
 			_on_ContinueButton_pressed()
 		else:
 			_on_PauseButton_pressed()
