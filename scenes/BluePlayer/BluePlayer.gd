@@ -1,6 +1,6 @@
 extends Player
 
-var plat_color = Color("#001b96")
+var plat_color = Color("#0041b3")
 
 var energy_hud_scene = preload("res://scenes/EnergyHUD/EnergyHUD.tscn")
 var energy_bar

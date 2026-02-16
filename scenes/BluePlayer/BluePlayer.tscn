@@ -38,7 +38,7 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 0.121569, 0.215686, 0.713726, 1 )
+self_modulate = Color( 0.2225, 0.411625, 0.89, 1 )
 scale = Vector2( 2, 2 )
 texture = SubResource( 2 )
 
