@@ -3,7 +3,7 @@ extends Node
 signal on_bgplats_set
 
 const SCREEN_SIZE = Vector2(480,854)
-const GAME_VERSION = "Dev Version (v0.4.0+)"
+const GAME_VERSION = "v1.0.0"
 enum DIFFICULTY {NORMAL, EASY, FAST}
 const DIFFICULTY_STRINGS = {
 	DIFFICULTY.NORMAL:"Normal",
